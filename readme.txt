@@ -4,7 +4,7 @@ Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
 Tested up to: 3.4.1
-Stable tag: 1.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Add a "Pin It" button over your images, so users can add it to Pinterest easily.
@@ -55,6 +55,7 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 = 1.0.1 =
 * index.php file created, so directory won't be visible.
 * PHP files protected from direct loading.
+* Warning is shown if content width is WordPress standard, or no width detected
 
 = 1.0 =
 * Released 2012-8-07

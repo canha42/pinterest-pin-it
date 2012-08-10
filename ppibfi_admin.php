@@ -1,11 +1,13 @@
 <?php
-/*
-Control panel
+/* 
+=====================
+	Control panel
+=====================
 */
 
 if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_admin.php' == basename($_SERVER['SCRIPT_FILENAME'])) die ('Stop! Hammer time!');
 
-function xcake_pinterest_configs() {
+function pibfi_Engine_configs() {
 	if (isset($_POST['submit'])) {
 		update_option('xc_pg_index', $_POST['xc_pg_index']);
 		update_option('xc_pg_single', $_POST['xc_pg_single']);
@@ -91,6 +93,6 @@ function xcake_pinterest_configs() {
 
 	</div><!-- wrap -->
 <?php
-} //xcake_pinterest_configs
+} //pibfi_Engine_configs
 
 ?>

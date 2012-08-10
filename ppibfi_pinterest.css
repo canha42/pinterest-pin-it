@@ -13,11 +13,11 @@ Version: 1.0.1
 
 /* If you feel comfortable editing here, go ahead. I promise to add a function soon to easily change the button */
 
-.xc_pinterest {
+.pibfi_pinterest {
 	position: relative;
 	display: block;
 }
-.xc_pinterest .xc_pin {
+.pibfi_pinterest .xc_pin {
 	width: 80px; height: 50px; /* Please note that the button is 80px x 50px. If you use a different size button, change this */
 	background-image: url('ppibfi_button.png'); background-repeat: none; /* This is the buttons image. Image can be found in the plugin folder */
 	position: absolute;
@@ -27,7 +27,7 @@ Version: 1.0.1
 	cursor: pointer;
 	display: none;
 }
-.xc_pinterest img.left + .xc_pin {
+.pibfi_pinterest img.left + .xc_pin {
 	margin-left: 0;
 }
 
@@ -36,14 +36,14 @@ Version: 1.0.1
 		-----------------
 */
 
-.xc_pinterest .xc_pin,
-.xc_pinterest img {
+.pibfi_pinterest .xc_pin,
+.pibfi_pinterest img {
 	-webkit-transition:opacity .2s ease-out; -moz-transition:opacity .2s ease-out; transition:opacity .2s ease-out;
 }
-.xc_pinterest img:hover + .xc_pin,
-.xc_pinterest_hover {
+.pibfi_pinterest img:hover + .xc_pin,
+.pibfi_pinterest_hover {
 	opacity: .7;
 }
-.xc_pinterest .xc_pin:hover {
+.pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
 }
