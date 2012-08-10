@@ -1,0 +1,26 @@
+.xcpinc, .xcpf {width:45%; background:#e7e7e7 url('i/bkg.gif'); padding:20px; color:#9933cc; font-size:14px; border:1px solid #b1b1b1; color:#707070; border-radius:20px; box-shadow:0px 2px 2px #b1b1b1;}
+.xcpinc {float:left;}
+.xcpf {float:right}
+.xcpf h3 {color:#ff3368; text-shadow:1px 1px 1px #b0b0b0; margin:0 0 10px 0;}
+.xcpinc p, .xcpf p {margin:0 0 10px 0; line-height:140%; text-shadow:1px 1px 1px #b0b0b0;}
+.xcpinc fieldset {border:1px solid #b1b1b1; padding:10px; margin:20px 0;}
+.xcpinc legend {color:#ff3368; text-shadow:1px 1px 1px #b0b0b0; padding:0 10px;}
+.xcpinc .xcp_submit {background: #cdcdcd;
+background: -moz-linear-gradient(top, #cdcdcd 0%, #989898 50%, #7d7d7d 51%, #464646 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdcdcd), color-stop(50%,#989898), color-stop(51%,#7d7d7d), color-stop(100%,#464646));
+background: -webkit-linear-gradient(top, #cdcdcd 0%,#989898 50%,#7d7d7d 51%,#464646 100%);
+background: -o-linear-gradient(top, #cdcdcd 0%,#989898 50%,#7d7d7d 51%,#464646 100%);
+background: -ms-linear-gradient(top, #cdcdcd 0%,#989898 50%,#7d7d7d 51%,#464646 100%);
+background: linear-gradient(top, #cdcdcd 0%,#989898 50%,#7d7d7d 51%,#464646 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdcdcd', endColorstr='#464646',GradientType=0 );
+padding:10px 30px !important; border-radius:10px !important; color:#fff !important; font-size:17px; box-shadow:0px 1px 5px #222 !important; border:1px solid #212121;
+}
+.xcpinc .xcp_submit:hover {background: #b75bd1;
+background: -moz-linear-gradient(top,  #b75bd1 0%, #8338a9 50%, #6d2e98 51%, #4a1e71 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b75bd1), color-stop(50%,#8338a9), color-stop(51%,#6d2e98), color-stop(100%,#4a1e71));
+background: -webkit-linear-gradient(top,  #b75bd1 0%,#8338a9 50%,#6d2e98 51%,#4a1e71 100%);
+background: -o-linear-gradient(top,  #b75bd1 0%,#8338a9 50%,#6d2e98 51%,#4a1e71 100%);
+background: -ms-linear-gradient(top,  #b75bd1 0%,#8338a9 50%,#6d2e98 51%,#4a1e71 100%);
+background: linear-gradient(top,  #b75bd1 0%,#8338a9 50%,#6d2e98 51%,#4a1e71 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b75bd1', endColorstr='#4a1e71',GradientType=0 ); box-shadow:0px 1px 5px #220a36 !important; border:1px solid #212121;}
+.xcp_redes {float:left; margin-right:20px;}
