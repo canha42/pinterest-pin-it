@@ -85,6 +85,15 @@ function pibfi_Engine($content) {
 		Possible solution: Use regex to ignore <img> with these specific classes. Using jQuery is not a good solution, as the ignored images sometimes can't have a display:block to them.
 	*/
 	
+	/*
+		==================
+			Issue #4
+		==================
+		If user populates <?php get_option("pibfi_ShowButton"); ?> with an array of CSS classes, only images with those classes will recieve the button. The Issue #3 is ignored in this case.
+		
+		Possible solution: Only execute the str_replace and Issue #3 on all images if get_option("pibfi_ShowButton") is FALSE. Else, execure str_replace only on images with classes described in get_option("pibfi_ShowButton");
+	*/
+	
 	$matches = array();
 	preg_match_all('/<img(.*?)src=[\'"](.*?)[\'"](.*?)>/i', $content, $matches);
 
@@ -208,6 +217,8 @@ function xc_pin_intstall() {
 	if(get_option('xc_pg_single') == false) update_option('xc_pg_single', 'on');
 	if(get_option('xc_pg_page') == false) update_option('xc_pg_page', 'on');
 	if(get_option('xc_pg_cat') == false) update_option('xc_pg_cat', 'on');
+	$dontShowButtonsOn = array("wp_smiley", "nopin"); //Default classes to *ignore* the button
+	if(get_option('pibfi_NoShowButton') == false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
 }
 
 // Run hook:
