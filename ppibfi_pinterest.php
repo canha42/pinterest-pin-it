@@ -57,19 +57,9 @@ include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 
 function pibfi_Engine($content) {
 	global $post;
-	$post_url = get_permalink(); //Get the post URL
-	$post_title = get_the_title(); //Get the post title
+	$post_url = get_option('ppibfi_url'); //Get the post URL
+	$post_title = get_option('ppibfi_title'); //Get the post title
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
-	
-	// The pinterest button container and button
-	$pin_container_start = 	'<span class="pibfi_pinterest">'; //Before <img>
-	$pin_button_start = 			'<span class="xc_pin"'; //After <img> closes, before <pibfi_pinterest> closes
-	$pin_button_base_url = 			'data-pibfi_pinterest_base_url'; // = $pinterest_base_url
-	$pin_button_post_url = 			'data-pibfi_pinterest_post_url'; //The link to original post
-	$pin_button_media = 				'data-pibfi_pinterest_media'; //The image URL to be pinned
-	$pin_button_description = 	'data-pibfi_pinterest_description'; //Post title as the Pin Description
-	$pin_button_end =				'></span>'; // End <xc_pin>
-	$pin_container_end = 	'</span>'; //End <pibfi_pinterest>
 	
 	// Begin - Replace post image
 	// Normalize relative vs absolute image paths to absolute (required for the plugin)
@@ -100,18 +90,17 @@ function pibfi_Engine($content) {
 	foreach($matches[2] as $match)
 		if($match{0} == "/")
 			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);	
-	
-	//The actual changes:
-	$replacement =
-	$pin_container_start.
-		'<img$1src="$2.$3"$4>'.
-		$pin_button_start.' '.
-			$pin_button_base_url.'="'.$pinterest_base_url.'" '.
-			$pin_button_post_url.'="'.$post_url.'" '.
-			$pin_button_media.'="'.'$2'.'.$3'.'" '.
-			$pin_button_description.'="'.$post_title.'"'.
-		$pin_button_end.
-	$pin_container_end;
+
+	// By victorjohnson:
+	$replacement = '
+		<span class="pibfi_pinterest">
+		<img$1src="$2.$3"$4>
+			<span class="xc_pin" onclick="pin_this(event, \''.
+			$pinterest_base_url.
+			'?url='.urlencode($post_url).
+			'&media=$2.$3'.'&description='.urlencode($post_title).'\')">
+			</span>
+		</span>';
 
 	/*
 		==================
@@ -124,7 +113,7 @@ function pibfi_Engine($content) {
 	
 	/* User selected options (if "show on X and is X", then run the script): */
 	// Show on index.php / home page:
-	if (get_option('xc_pg_index') == "on" && is_home()) {
+	if (get_option('ppibfi_pg_index') == "on" && is_home()) {
 		// Issue #2 code that doesn't work:
 		//$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
 		//if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
@@ -133,19 +122,19 @@ function pibfi_Engine($content) {
 	}
 	
 	// Show on single.php:
-	elseif (get_option('xc_pg_single') == "on" && is_single()) {
+	elseif (get_option('ppibfi_pg_single') == "on" && is_single()) {
 		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
 		if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
 	}
 	
 	// Show on page.php:
-	elseif (get_option('xc_pg_page') == "on" && is_page()) {
+	elseif (get_option('ppibfi_pg_page') == "on" && is_page()) {
 		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
 		if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
 	}
 	
 	// Show on category.php / archive.php:
-	elseif (get_option('xc_pg_cat') == "on" && is_category()) {
+	elseif (get_option('ppibfi_pg_cat') == "on" && is_category()) {
 		$content = preg_replace( $pattern, $replacement, $content );
 	}
 	
@@ -163,7 +152,7 @@ function pibfi_Engine($content) {
 /* This function prints a global javascript var that defines the width of the content. In this case, the width is defined by the largest size for an image. This will enable jQuery to calculate where the button is placed whatever the alignment of the image */
 
 function cWGlobal() {
-	echo "<script type='text/javascript'> var ContentWidth = '".get_option('large_size_w')."'; </script>\n";
+	echo "<script type='text/javascript'> var ContentWidth = '".get_option('ppibfi_content_width')."'; </script>\n";
 }
 
 /* 
@@ -188,7 +177,7 @@ function pibfi_Engine_menu() {
 if (is_admin()) {
 	pibfi_CheckContentWidth();
 	wp_enqueue_style('pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css'); 
-	if (get_option('xc_opt_enable') == "on") add_action( 'add_meta_boxes', 'xcp_optin' ); //ppibfi_meta.php
+	if (get_option('ppibfi_opt_enable') == "on") add_action( 'add_meta_boxes', 'xcp_optin' ); //ppibfi_meta.php
 	
 }
 
@@ -212,11 +201,11 @@ if (!is_admin() && stripos($_SERVER['HTTP_USER_AGENT'], 'mobile') != true) {
 
 function xc_pin_intstall() {	
 	// On install, check if options exist. If not, set defaults 
-	if(get_option('xc_pg_method') == false) update_option('xc_pg_method', 'popup');
-	if(get_option('xc_pg_index') == false) update_option('xc_pg_index', 'on');
-	if(get_option('xc_pg_single') == false) update_option('xc_pg_single', 'on');
-	if(get_option('xc_pg_page') == false) update_option('xc_pg_page', 'on');
-	if(get_option('xc_pg_cat') == false) update_option('xc_pg_cat', 'on');
+	if(get_option('ppibfi_pg_method') == false) update_option('ppibfi_pg_method', 'popup');
+	if(get_option('ppibfi_pg_index') == false) update_option('ppibfi_pg_index', 'on');
+	if(get_option('ppibfi_pg_single') == false) update_option('ppibfi_pg_single', 'on');
+	if(get_option('ppibfi_pg_page') == false) update_option('ppibfi_pg_page', 'on');
+	if(get_option('ppibfi_pg_cat') == false) update_option('ppibfi_pg_cat', 'on');
 	$dontShowButtonsOn = array("wp_smiley", "nopin"); //Default classes to *ignore* the button
 	if(get_option('pibfi_NoShowButton') == false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
 }

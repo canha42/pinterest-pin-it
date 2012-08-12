@@ -43,15 +43,13 @@ jQuery(window).ready(function(jQuery) {
 		}
 	);
 	
-	//Trigger when user clicks the Pin It button
-	jQuery('.xc_pin').click(function(e){
-		var $this = jQuery(this),
-				pin_base_url = $this.attr('data-pibfi_pinterest_base_url'),
-				pin_post_url = encodeURIComponent($this.attr('data-pibfi_pinterest_post_url')),
-				pin_media = encodeURIComponent($this.attr('data-pibfi_pinterest_media')),
-				pin_desc = encodeURIComponent($this.attr('data-pibfi_pinterest_description')),
-				url = pin_base_url + '?' + 'url=' + pin_post_url + '&media=' + pin_media + '&description=' + pin_desc;
+});
+
+// By victorjohnson
+function pin_this(e, url) {
+	jQuery(window).ready(function(jQuery) {
 		window.open(url, 'pinterest', 'screenX=100,screenY=100,height=580,width=730');
 		e.preventDefault();
+		e.stopPropagation();
 	});
-});
+}
