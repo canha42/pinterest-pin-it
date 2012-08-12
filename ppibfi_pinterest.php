@@ -208,6 +208,7 @@ function xc_pin_intstall() {
 	if(get_option('ppibfi_pg_cat') == false) update_option('ppibfi_pg_cat', 'on');
 	$dontShowButtonsOn = array("wp_smiley", "nopin"); //Default classes to *ignore* the button
 	if(get_option('pibfi_NoShowButton') == false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
+	pibfi_CheckImagesWidth();
 }
 
 // Run hook:

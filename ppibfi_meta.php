@@ -57,10 +57,18 @@ function xcp_optin_save( $post_id ) {
 
 // Error messages if content width is not set or seems to be WP default:
 function pibfi_CheckContentWidth() {
+
+	$standardImageW = get_option('large_size_w');
+	$contentWidth = get_option('ppibfi_content_width');
 	// Set to standard:
-	if (get_option('large_size_w') == "1024") add_action('admin_notices' , create_function( '', "echo '<div class=error><p>Your maximum image width is thought to be 1024 pixels. <strong>This might be incorrect and might affect the functionality of the Pinterest Pin It plugin</strong>. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugins settings</a>.</p></div>';" ));
+	if ($standardImageW == "1024" && $contentWidth == false) add_action('admin_notices' , create_function( '', "echo '<div class=error><p>Your maximum image width is thought to be 1024 pixels. <strong>This might be incorrect and might affect the functionality of the Pinterest Pin It plugin</strong>. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugins settings</a>.</p></div>';" ));
 	
 	// Non existent:
-	elseif (get_option('large_size_w') == false) add_action('admin_notices' , create_function( '', "echo '<div class=error><p>No maximum image width has been detected. This might affect the functionality of the <strong>Pinterest Pin It</strong> plugin. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugin settings</a>.</div>';" ));
+	elseif ($standardImageW == false && $contentWidth == false) add_action('admin_notices' , create_function( '', "echo '<div class=error><p>No maximum image width has been detected. This might affect the functionality of the <strong>Pinterest Pin It</strong> plugin. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugin settings</a>.</div>';" ));
+}
+
+function pibfi_CheckImagesWidth() {
+	$standardImageW = get_option('large_size_w');
+	if ($standardImageW != "1024" && $standardImageW != false) update_option('ppibfi_content_width', $standardImageW);
 }
 ?>

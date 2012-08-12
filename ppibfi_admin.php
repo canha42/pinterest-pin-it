@@ -25,17 +25,26 @@ function pibfi_Engine_configs() {
 	if (get_option('ppibfi_opt_enable') == "on") $xcp_opt_enable = 'checked';
 	$ppibfi_content_width = get_option('ppibfi_content_width');
 ?>	
-<script type="text/javascript">checked=false;function checkedAll (frm1) {var aa= document.getElementById('pinpages');if (checked == false){checked = true;}else{checked = false;}for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
+<script type="text/javascript">checked=false;function checkedAll () {var aa= document.getElementById('pinpages');if (checked == false){checked = true;}else{checked = false;}for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
 	<div class="wrap">
 
 		<h2>Pinterest Pin It Button For Images</h2>
 		<div class="xcpinc">
 		<p>Here you may change some settings for your Pinterest PIBFI plugin, altough it is not necessary (we alreay have the optimal settings done for you).</p>
 		<form method="post" action="#" id="frm1">
+		
+		<fieldset>
+			<legend>Content width:</legend>
+			<p>The plugin needs to know the width of the content area in pixels to place the button (only numbers).</p>
+			<p>
+			<input type="number" name="ppibfi_content_width" id="ppibfi_content_width" value="<?=$ppibfi_content_width?>" />
+			</p>
+		</fieldset>
+		
 		<fieldset id="pinpages">
 			<legend>Show "Pin It" button on following pages:</legend>
 			<p>
-			<input type="checkbox" name="ppibfi_pg_all" id="ppibfi_pg_all" onclick="checkedAll(frm1);" />
+			<input type="checkbox" name="ppibfi_pg_all" id="ppibfi_pg_all" onclick="checkedAll();" />
 			<label for="ppibfi_pg_all">All pages</label>
 			</p>
 			<p>
@@ -65,14 +74,6 @@ function pibfi_Engine_configs() {
 			</p>
 		</fieldset>
 		
-		<fieldset>
-			<legend>Content width:</legend>
-			<p>The plugin needs to know the width of the content area to place the button.</p>
-			<p>
-			<input type="text" name="ppibfi_content_width" id="ppibfi_content_width" value="<?=$ppibfi_content_width?>" />
-			</p>
-		</fieldset>
-		
 
 		<input type="submit" name="submit" value="<?php _e('Save', 'xcp_translate'); ?>" class="xcp_submit" />
 		</form>
@@ -81,7 +82,7 @@ function pibfi_Engine_configs() {
 	<div class="xcpf">
 		<h3>Care to help?</h3>
 		<p>This plugin takes up a *lot* of my spare time. Any donation amount (like five bucks) will be well appreciated as it'll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.</p>
-		<p>If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don't have any "mad skillz", you can also help by reporting bugs at <a href="http://canha.net/bugs/">our tracker</a>. Please help spread the word about this plugin!</p>
+		<p>If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don't have any "mad skillz", you can also help by reporting bugs at <a href="https://github.com/canha42/pinterest-pin-it/issues">GitHub</a>. Please help spread the word about this plugin!</p>
 		<p>Thanks!</p>
 		<div class="xcp_redes"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/pinterest-pin-it-button-for-images/" data-text="I'm using &quot;Pinterest Pin It Button For Images&quot; WP plugin on my site!" data-size="large" data-hashtags="pibfi">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
