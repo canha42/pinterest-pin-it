@@ -9,48 +9,50 @@ if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_admin.php' == basename($_SERV
 
 function pibfi_Engine_configs() {
 	if (isset($_POST['submit'])) {
-		update_option('xc_pg_index', $_POST['xc_pg_index']);
-		update_option('xc_pg_single', $_POST['xc_pg_single']);
-		update_option('xc_pg_page', $_POST['xc_pg_page']);
-		update_option('xc_pg_cat', $_POST['xc_pg_cat']);
-		update_option('xc_opt_enable', $_POST['xc_opt_enable']);
+		update_option('ppibfi_pg_index', $_POST['ppibfi_pg_index']);
+		update_option('ppibfi_pg_single', $_POST['ppibfi_pg_single']);
+		update_option('ppibfi_pg_page', $_POST['ppibfi_pg_page']);
+		update_option('ppibfi_pg_cat', $_POST['ppibfi_pg_cat']);
+		update_option('ppibfi_opt_enable', $_POST['ppibfi_opt_enable']);
+		update_option('ppibfi_content_width', $_POST['ppibfi_content_width']);
 		?><div class="updated"><p><strong><?php _e('Options saved.', 'xcp_translate'); ?></strong></p></div><?php
 	}
 	 
-	if (get_option('xc_pg_index') == "on") $xcp_index = 'checked';
-	if (get_option('xc_pg_single') == "on") $xcp_single = 'checked';
-	if (get_option('xc_pg_page') == "on") $xcp_page = 'checked';
-	if (get_option('xc_pg_cat') == "on") $xcp_cat = 'checked';
-	if (get_option('xc_opt_enable') == "on") $xcp_opt_enable = 'checked';
+	if (get_option('ppibfi_pg_index') == "on") $xcp_index = 'checked';
+	if (get_option('ppibfi_pg_single') == "on") $xcp_single = 'checked';
+	if (get_option('ppibfi_pg_page') == "on") $xcp_page = 'checked';
+	if (get_option('ppibfi_pg_cat') == "on") $xcp_cat = 'checked';
+	if (get_option('ppibfi_opt_enable') == "on") $xcp_opt_enable = 'checked';
+	$ppibfi_content_width = get_option('ppibfi_content_width');
 ?>	
-<script type="text/javascript">checked=false;function checkedAll (frm1) {var aa= document.getElementById('frm1');if (checked == false){checked = true;}else{checked = false;}for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
+<script type="text/javascript">checked=false;function checkedAll (frm1) {var aa= document.getElementById('pinpages');if (checked == false){checked = true;}else{checked = false;}for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
 	<div class="wrap">
 
 		<h2>Pinterest Pin It Button For Images</h2>
 		<div class="xcpinc">
 		<p>Here you may change some settings for your Pinterest PIBFI plugin, altough it is not necessary (we alreay have the optimal settings done for you).</p>
 		<form method="post" action="#" id="frm1">
-		<fieldset>
+		<fieldset id="pinpages">
 			<legend>Show "Pin It" button on following pages:</legend>
 			<p>
-			<input type="checkbox" name="xc_pg_all" id="xc_pg_all" onclick="checkedAll(frm1);" />
-			<label for="xc_pg_all">All pages</label>
+			<input type="checkbox" name="ppibfi_pg_all" id="ppibfi_pg_all" onclick="checkedAll(frm1);" />
+			<label for="ppibfi_pg_all">All pages</label>
 			</p>
 			<p>
-			<input type="checkbox" name="xc_pg_index" id="xc_pg_index" <?=$xcp_index?> />
-			<label for="xc_pg_index">Index / home</label>
+			<input type="checkbox" name="ppibfi_pg_index" id="ppibfi_pg_index" <?=$xcp_index?> />
+			<label for="ppibfi_pg_index">Index / home</label>
 			</p>
 			<p>
-			<input type="checkbox" name="xc_pg_single" id="xc_pg_single" <?=$xcp_single?> />
-			<label for="xc_pg_single">Single post</label>
+			<input type="checkbox" name="ppibfi_pg_single" id="ppibfi_pg_single" <?=$xcp_single?> />
+			<label for="ppibfi_pg_single">Single post</label>
 			</p>
 			<p>
-			<input type="checkbox" name="xc_pg_cat" id="xc_pg_cat" <?=$xcp_cat?> />
-			<label for="xc_pg_cat">Category page</label>
+			<input type="checkbox" name="ppibfi_pg_cat" id="ppibfi_pg_cat" <?=$xcp_cat?> />
+			<label for="ppibfi_pg_cat">Category page</label>
 			</p>
 			<p>
-			<input type="checkbox" name="xc_pg_page" id="xc_pg_page" <?=$xcp_page?> />
-			<label for="xc_pg_page">Page</label>
+			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?=$xcp_page?> />
+			<label for="ppibfi_pg_page">Page</label>
 			</p>
 			
 		</fieldset>
@@ -58,8 +60,16 @@ function pibfi_Engine_configs() {
 			<legend>Opt-out on single pages:</legend>
 			<p>Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page</p>
 			<p>
-			<input type="checkbox" name="xc_opt_enable" id="xc_opt_enable" value="on" <?=$xcp_opt_enable?> />
-			<label for="xc_opt_enable">Enable opt-out</label>
+			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?=$xcp_opt_enable?> />
+			<label for="ppibfi_opt_enable">Enable opt-out</label>
+			</p>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Content width:</legend>
+			<p>The plugin needs to know the width of the content area to place the button.</p>
+			<p>
+			<input type="text" name="ppibfi_content_width" id="ppibfi_content_width" value="<?=$ppibfi_content_width?>" />
 			</p>
 		</fieldset>
 		
