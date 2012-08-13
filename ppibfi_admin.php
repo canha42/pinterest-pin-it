@@ -78,7 +78,9 @@ function pibfi_Engine_configs() {
 		<input type="submit" name="submit" value="<?php _e('Save', 'xcp_translate'); ?>" class="xcp_submit" />
 		</form>
 	</div><!-- xcpinc -->
-	
+	<div class="xcpf">
+		<h3>Advanced</h3>
+	</div><!-- /xcpf (advanced) -->
 	<div class="xcpf">
 		<h3>Care to help?</h3>
 		<p>This plugin takes up a *lot* of my spare time. Any donation amount (like five bucks) will be well appreciated as it'll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.</p>
