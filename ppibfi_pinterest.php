@@ -61,19 +61,6 @@ function pibfi_Engine($content) {
 	$post_title = get_option('ppibfi_title'); //Get the post title
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
 	
-	// Begin - Replace post image
-	// Normalize relative vs absolute image paths to absolute (required for the plugin)
-	// Add pinterest button elements
-	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
-	
-	/*
-		==================
-			Issue #3
-		==================
-		If the image has a specific class, such as .wp_smiley, the plugin shouldn't add the button to this particular image. The user can select if he wants other classes not to show the button. Array of classes NOT to show button: <?php get_option("pibfi_NoShowButton"); ?>
-		
-		Possible solution: Use regex to ignore <img> with these specific classes. Using jQuery is not a good solution, as the ignored images sometimes can't have a display:block to them.
-	*/
 	
 	/*
 		==================
@@ -84,64 +71,111 @@ function pibfi_Engine($content) {
 		Possible solution: Only execute the str_replace and Issue #3 on all images if get_option("pibfi_ShowButton") is FALSE. Else, execure str_replace only on images with classes described in get_option("pibfi_ShowButton");
 	*/
 	
+	// Normalize relative vs absolute image paths to absolute (required for the plugin)
 	$matches = array();
 	preg_match_all('/<img(.*?)src=[\'"](.*?)[\'"](.*?)>/i', $content, $matches);
-
 	foreach($matches[2] as $match)
 		if($match{0} == "/")
 			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);	
 
-	// By victorjohnson:
-	$replacement = '
-		<span class="pibfi_pinterest">
-		<img$1src="$2.$3"$4>
-			<span class="xc_pin" onclick="pin_this(event, \''.
-			$pinterest_base_url.
-			'?url='.urlencode($post_url).
-			'&media=$2.$3'.'&description='.urlencode($post_title).'\')">
-			</span>
-		</span>';
-
-	/*
-		==================
-			Issue #2
-		==================
-		Here lies a problem. If <?php $meta_values = get_post_meta($post->ID, 'xcp_optin_post'); if($meta_values[0] == "on") return true; else return false; ?> returns true (that means that the user doesn't want this particular $post to have the Pin It button on it), it works fine on a is_single() page, but doesn't work on is_home().
-		
-		Possible solution: the preg_replace has to run on each post separately, checking if that $post->ID has the "on" value.
-	*/
-	
-	/* User selected options (if "show on X and is X", then run the script): */
 	// Show on index.php / home page:
 	if (get_option('ppibfi_pg_index') == "on" && is_home()) {
 		// Issue #2 code that doesn't work:
-		//$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		//if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
-		
-		$content = preg_replace( $pattern, $replacement, $content );
+		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
+		/*
++++++++++++++++++++++++++++++++++++++++
+About the issue #2:
+I just uncommment this links bellow and it worked as well.
+At the admin I checked the option Show "Pin It" button on following pages: Index / home
+And also checked checked the option Opt-out on single pages: Enable opt-out
++++++++++++++++++++++++++++++++++++++++
+		*/
+		if ($isOpted[0] != "on") {
+			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+		}
 	}
 	
 	// Show on single.php:
 	elseif (get_option('ppibfi_pg_single') == "on" && is_single()) {
 		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
+		if ($isOpted[0] != "on") {
+			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+		}
 	}
 	
 	// Show on page.php:
 	elseif (get_option('ppibfi_pg_page') == "on" && is_page()) {
 		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		if ($isOpted[0] != "on") $content = preg_replace( $pattern, $replacement, $content );
+		if ($isOpted[0] != "on"){
+			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+		}
 	}
 	
 	// Show on category.php / archive.php:
 	elseif (get_option('ppibfi_pg_cat') == "on" && is_category()) {
-		$content = preg_replace( $pattern, $replacement, $content );
+		$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 	}
 	
 	// Print out the content with the changes on images
 	return $content;
 }
 
+/* This function adds the pin at each post's image */
+function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ){
+	// I had to change this string in order to use the sprintf function.
+	// By victorjohnson:
+	$replacement = '
+		<span class="pibfi_pinterest">
+		<img%1$ssrc="%2$s.%3$s"%4$s>
+			<span class="xc_pin" onclick="pin_this(event, \''.
+			$pinterest_base_url.
+			'?url='.urlencode($post_url).
+			'&media=%2$s.%3$s'.'&description='.urlencode($post_title).'\')">
+			</span>
+		</span>';
+	// Regular expression that finds all post's images
+	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
+	// Array to store the regular expression matches 
+	$matches = array();
+	// Execute the regular expression
+	preg_match_all($pattern, $content, $matches);
+	// Array to store the images
+	$images = array();
+	// Image count
+	$image_count = 0;
+	// Loop to join the tag image properties with its matches
+	for( $i = 0; $i < sizeof($matches[0]); $i++ ){
+		$images[ $image_count ]['tag'] = $matches[0][$i];
+		$images[ $image_count ][1] = $matches[1][$i];
+		$images[ $image_count ][2] = $matches[2][$i];
+		$images[ $image_count ][3] = $matches[3][$i];
+		$images[ $image_count ][4] = $matches[4][$i];
+		$image_count++;
+	}
+	// Loop to replace the normal tag by the html with the pin, if it is necessary
+	foreach( $images as $image ){
+		// Check if the image should or shoudn't has the pin
+		if( pibfi_Engine_should_it_has_pin( $image['tag'] ) ){
+			// If it shoud do the replacement
+			$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4]);
+			$content = str_replace( $image['tag'], $image_tag, $content);
+		}
+	}
+	return $content;
+}
+
+/* This function checks if the image has a specific class, such as .wp_smiley, wp-thumb if it does the plugin shouldn't add the button to this particular image.  */
+function pibfi_Engine_should_it_has_pin( $tag ){
+	$has_forbidden_class = false;
+	// Array with not allowed css classes
+	$forbidden_classes = array( 'wp-smiley', 'wp-thumb' );
+	foreach( $forbidden_classes as $class ){
+		if( strpos( $tag, $class ) > 0 ){
+			$has_forbidden_class = true;
+		}
+	}
+	return !$has_forbidden_class;
+}
 
 /* 
 =========================
