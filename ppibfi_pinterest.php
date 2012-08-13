@@ -60,36 +60,12 @@ function pibfi_Engine($content) {
 	$post_url = get_option('ppibfi_url'); //Get the post URL
 	$post_title = get_option('ppibfi_title'); //Get the post title
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
-	
-	
-	/*
-		==================
-			Issue #4
-		==================
-		If user populates <?php get_option("pibfi_ShowButton"); ?> with an array of CSS classes, only images with those classes will recieve the button. The Issue #3 is ignored in this case.
-		
-		Possible solution: Only execute the str_replace and Issue #3 on all images if get_option("pibfi_ShowButton") is FALSE. Else, execure str_replace only on images with classes described in get_option("pibfi_ShowButton");
-	*/
-	
-	// Normalize relative vs absolute image paths to absolute (required for the plugin)
-	$matches = array();
-	preg_match_all('/<img(.*?)src=[\'"](.*?)[\'"](.*?)>/i', $content, $matches);
-	foreach($matches[2] as $match)
-		if($match{0} == "/")
-			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);	
+
+	$content = pibfi_Engine_normalize_image_paths( $content );
 
 	// Show on index.php / home page:
 	if (get_option('ppibfi_pg_index') == "on" && is_home()) {
-		// Issue #2 code that doesn't work:
 		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		/*
-+++++++++++++++++++++++++++++++++++++++
-About the issue #2:
-I just uncommment this links bellow and it worked as well.
-At the admin I checked the option Show "Pin It" button on following pages: Index / home
-And also checked checked the option Opt-out on single pages: Enable opt-out
-+++++++++++++++++++++++++++++++++++++++
-		*/
 		if ($isOpted[0] != "on") {
 			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 		}
@@ -120,6 +96,18 @@ And also checked checked the option Opt-out on single pages: Enable opt-out
 	return $content;
 }
 
+// This function normalize relative vs absolute image paths to absolute (required for the plugin)
+function pibfi_Engine_normalize_image_paths( $content ){
+	$matches = array();
+	preg_match_all('/<img(.*?)src=[\'"](.*?)[\'"](.*?)>/i', $content, $matches);
+	foreach($matches[2] as $match){
+		if($match{0} == "/"){
+			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);	
+		}
+	}
+	return $content;
+}
+
 /* This function adds the pin at each post's image */
 function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ){
 	// I had to change this string in order to use the sprintf function.
@@ -135,46 +123,93 @@ function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 		</span>';
 	// Regular expression that finds all post's images
 	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
-	// Array to store the regular expression matches 
+	// Array to store the images that matches 
 	$matches = array();
 	// Execute the regular expression
 	preg_match_all($pattern, $content, $matches);
-	// Array to store the images
+	// Array to store the images and its properties
 	$images = array();
 	// Image count
 	$image_count = 0;
 	// Loop to join the tag image properties with its matches
 	for( $i = 0; $i < sizeof($matches[0]); $i++ ){
 		$images[ $image_count ]['tag'] = $matches[0][$i];
-		$images[ $image_count ][1] = $matches[1][$i];
-		$images[ $image_count ][2] = $matches[2][$i];
-		$images[ $image_count ][3] = $matches[3][$i];
-		$images[ $image_count ][4] = $matches[4][$i];
+		$images[ $image_count ][1] = $matches[1][$i]; // match 1 - content before the src attr
+		$images[ $image_count ][2] = $matches[2][$i]; // match 2 - image url without extension
+		$images[ $image_count ][3] = $matches[3][$i]; // match 3 - the extension
+		$images[ $image_count ][4] = $matches[4][$i]; // match 4 - content after the src attr
 		$image_count++;
+	}
+	// Loop to check if any image has the 'needed' pin class: pinthis (pibfi_ShowButton)
+	$any_image_has_the_needed_pin_class = false;
+	for( $i=0; $i < sizeof( $images ); $i++ ){
+		$needed = pibfi_Engine_check_if_the_image_has_pinthis_class( $images[ $i ][ 'tag' ] );
+		if( $needed ){
+			$any_image_has_the_needed_pin_class = true;
+		}
+		$images[ $i ][ 'pinthis' ] = $needed; 
 	}
 	// Loop to replace the normal tag by the html with the pin, if it is necessary
 	foreach( $images as $image ){
-		// Check if the image should or shoudn't has the pin
-		if( pibfi_Engine_should_it_has_pin( $image['tag'] ) ){
-			// If it shoud do the replacement
-			$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4]);
-			$content = str_replace( $image['tag'], $image_tag, $content);
+		// If the post has any image with the (pibfi_ShowButton) class, the pin'll be showed in just these images
+		if( $any_image_has_the_needed_pin_class ){
+			if( $image[ 'pinthis' ] ){
+				$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4]);
+				$content = str_replace( $image['tag'], $image_tag, $content);
+			}
+		} else {
+			// Check if the image should or shoudn't has the pin
+			if( pibfi_Engine_check_if_the_image_has_the_forbidden_class( $image['tag'] ) ){
+				// If it shoud do the replacement
+				$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4]);
+				$content = str_replace( $image['tag'], $image_tag, $content);
+			}
 		}
 	}
 	return $content;
 }
 
-/* This function checks if the image has a specific class, such as .wp_smiley, wp-thumb if it does the plugin shouldn't add the button to this particular image.  */
-function pibfi_Engine_should_it_has_pin( $tag ){
+/* This function checks if the image has the 'pinthis' class  */
+function pibfi_Engine_check_if_the_image_has_pinthis_class( $tag ){
+	$pinthis = ( get_option("pibfi_ShowButton") ) ? get_option("pibfi_ShowButton") : 'pinthis';
+	preg_match( '/class=[\'"](.*)?' . trim( $pinthis ) . '(.*)?[\'"]/i', $tag, $matches );
+	if( $matches && pibfi_Util_the_array_has_content( $matches ) ){
+		return true;
+	}
+	return false;
+}
+
+/* This function checks if the image has a specific class, such as .wp-smiley, wp-thumb if it does the plugin shouldn't add the button to this particular image.  */
+function pibfi_Engine_check_if_the_image_has_the_forbidden_class( $tag ){
 	$has_forbidden_class = false;
-	// Array with not allowed css classes
-	$forbidden_classes = array( 'wp-smiley', 'wp-thumb' );
+	// Array/String with not allowed css classes
+	$forbidden_classes = get_option( 'pibfi_NoShowButton' );
+	// If the option's value is a string explode it
+	if( !is_array( $forbidden_classes ) ){
+		$forbidden_classes = explode( ',', $forbidden_classes );
+	}
 	foreach( $forbidden_classes as $class ){
-		if( strpos( $tag, $class ) > 0 ){
+		// Regular expression to detect if the tag has the forbbiden class
+		preg_match( '/class=[\'"](.*)?' . trim( $class ) . '(.*)?[\'"]/i', $tag, $matches );
+		if( $matches ){
 			$has_forbidden_class = true;
+			break;
 		}
 	}
 	return !$has_forbidden_class;
+}
+
+/* This fuction checks if the array has any value or is just an empty array */
+function pibfi_Util_the_array_has_content( $arr ){
+	foreach( $arr as $ar ){
+		if( is_array( $ar ) ){
+			return pibfi_Util_the_array_has_content( $ar );
+		} else {
+			if( $ar != '' ){
+				return true;
+			}
+		}
+	}
 }
 
 /* 
