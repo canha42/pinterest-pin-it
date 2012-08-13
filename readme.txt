@@ -58,6 +58,7 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Feature: Warning is shown if content width is WordPress standard, or no width detected.
 * Feature: Ability to set content width on plugin settings page.
 * Bug: "All pages" bug, selecting all checkboxes on screen.
+* Bug: Text shadow in plugin settings page removed
 
 = 1.0 =
 * Released 2012-8-07
