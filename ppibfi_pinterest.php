@@ -19,34 +19,24 @@ include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 	 
 /** 
 	* Special thanks:
+
+	* Daniel Camargo (http://profiles.wordpress.org/pererinha) for the enormous help
+	* @link http://danielcamargo.com
 	
+	* Victor (http://profiles.wordpress.org/kortchnoi) for the JS changes
+		
 	* Third Mind for giving an alternative to my script
 	* @link http://thirdmind.com
 
 	* David Cowgill for the regex:
 	* @link http://docs.appthemes.com/tutorials/automatically-add-rel-attribute-to-wordpress-images/
 
-	* Thiago Galesi (@dsracoon) and Joao Ricardo (@JoaoRicardo_RM) for the help with regex
+	* Thiago Galesi (@dsracoon) and Joao Ricardo (@JoaoRicardo_RM) for the help with early regex
 	
 	* Every one who has been reporting bugs.
 	
-	* Super special thanks: to YOU, for donating *wink, wink*
-	
-	* Usefull links:
-	* @link http://wordpress.stackexchange.com/questions/2126/at-what-priority-does-add-filter-overwrite-core-functions
-	* @link http://www.ilovecolors.com.ar/how-to-detect-iphone-browser-natively-in-wordpress/
-	
+	* Super special thanks: to YOU, for donating *wink, wink*	
 */
-
-	/*
-		==================
-			Issue #1
-		==================
-		Content width getting real screwed up.
-		
-		Solution: On install, see what the width is. If it's non-equal to 1024, add that value to the content width box option. In config panel, create an empty input where user can insert the width. On the pibfi_CheckContentWidth() function, see if this box is empty AND if the width is 1024 / false. Only then show the error. On the wp_head() function, get always that boxes value. 
-		Working on it (@canha)
-	*/
 
 
 /* 
@@ -111,7 +101,7 @@ function pibfi_Engine_normalize_image_paths( $content ){
 /* This function adds the pin at each post's image */
 function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ){
 	// I had to change this string in order to use the sprintf function.
-	// By victorjohnson:
+	// By kortchnoi:
 	$replacement = '
 		<span class="pibfi_pinterest">
 		<img%1$ssrc="%2$s.%3$s"%4$s>
@@ -217,8 +207,6 @@ function pibfi_Util_the_array_has_content( $arr ){
 	Add to wp_head();
 =========================
 */
-
-/* This function prints a global javascript var that defines the width of the content. In this case, the width is defined by the largest size for an image. This will enable jQuery to calculate where the button is placed whatever the alignment of the image */
 
 function cWGlobal() {
 	echo "<script type='text/javascript'> var ContentWidth = '".get_option('ppibfi_content_width')."'; </script>\n";
