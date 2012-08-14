@@ -10,7 +10,7 @@ if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_meta.php' == basename($_SERVE
 
 /* Adds a box to the main column on the Post and Page edit screens */
 function xcp_optin() {
-	add_meta_box('xcp_optin_sectionid',__( 'Pinterest plugin', 'xcp_translate' ),'xcp_optin_custombox','','side');
+	add_meta_box('xcp_optin_sectionid',__( 'Pinterest plugin', 'ppibfi_translate' ),'xcp_optin_custombox','','side');
 }
 
 	/* 
@@ -30,7 +30,7 @@ function xcp_optin_custombox( $post ) {
 	// The actual fields for data entry
 	echo "<label for='xc_optin_field_disable'>";
 	echo '<input type="checkbox" name="xc_optin_field_disable" id="xc_optin_field_disable" value="on" '.$xc_check.' /> ';
-	_e('Disable Pinterest Pin It button on this page', 'xcp_translate'); 
+	_e('Disable Pinterest Pin It button on this page', 'ppibfi_translate'); 
 }
 
 	/* 
