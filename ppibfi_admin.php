@@ -32,7 +32,7 @@ function pibfi_Engine_configs() {
 
 		<h2>Pinterest Pin It Button For Images</h2>
 		<div class="xcpinc">
-		<p><?php _e('Here you may change some settings for your Pinterest PIBFI plugin, altough it is not necessary (we alreay have the optimal settings done for you).', 'ppibfi_translate'); ?></p>
+		<p><?php _e('Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you).', 'ppibfi_translate'); ?></p>
 		<form method="post" action="#" id="frm1">
 		
 		<fieldset>
