@@ -52,4 +52,5 @@ function pin_this(e, url) {
 		e.preventDefault();
 		e.stopPropagation();
 	});
+//});
 }

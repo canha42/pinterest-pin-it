@@ -13,6 +13,7 @@ function pibfi_Engine_configs() {
 		update_option('ppibfi_pg_single', $_POST['ppibfi_pg_single']);
 		update_option('ppibfi_pg_page', $_POST['ppibfi_pg_page']);
 		update_option('ppibfi_pg_cat', $_POST['ppibfi_pg_cat']);
+		update_option('ppibfi_img_pinthis', $_POST['ppibfi_img_pinthis']);
 		update_option('ppibfi_opt_enable', $_POST['ppibfi_opt_enable']);
 		update_option('ppibfi_content_width', $_POST['ppibfi_content_width']);
 		update_option('pibfi_NoShowButton',explode(',', $_POST['ppibfi_exclude']));
@@ -22,12 +23,14 @@ function pibfi_Engine_configs() {
 	if (get_option('ppibfi_pg_index') == "on") $xcp_index = 'checked';
 	if (get_option('ppibfi_pg_single') == "on") $xcp_single = 'checked';
 	if (get_option('ppibfi_pg_page') == "on") $xcp_page = 'checked';
+	if (get_option('ppibfi_img_pinthis') == "on") $xcp_img = 'checked';
 	if (get_option('ppibfi_pg_cat') == "on") $xcp_cat = 'checked';
 	if (get_option('ppibfi_opt_enable') == "on") $xcp_opt_enable = 'checked';
 	$ppibfi_content_width = get_option('ppibfi_content_width');
 	$ppibfi_exclude = get_option('pibfi_NoShowButton');
 ?>	
-<script type="text/javascript">checked=false;function checkedAll () {var aa= document.getElementById('pinpages');if (checked == false){checked = true;}else{checked = false;}for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
+<script type="text/javascript">checked=false;
+function checkedAll () {var aa= document.getElementById('pinpages');checked = !checked;for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
 	<div class="wrap">
 
 		<h2>Pinterest Pin It Button For Images</h2>
@@ -64,8 +67,14 @@ function pibfi_Engine_configs() {
 			<p>
 			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?=$xcp_page?> />
 			<label for="ppibfi_pg_page"><? _e('Page','ppibfi_translate'); ?> </label>
+			</p>	
+		</fieldset>
+		<fieldset>
+			<legend><? _e('All images with "pinthis" class:','ppibfi_translate'); ?> </legend>
+			<p>
+			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
+			<label for="ppibfi_img_pinthis"><? _e('Show the "Pin it" button only for the images with the "pinthis" class','ppibfi_translate'); ?> </label>
 			</p>
-			
 		</fieldset>
 		<fieldset>
 			<legend><? _e('Opt-out on single pages:','ppibfi_translate'); ?> </legend>
@@ -76,7 +85,6 @@ function pibfi_Engine_configs() {
 			</p>
 		</fieldset>
 		
-
 		<input type="submit" name="submit" value="<?php _e('Save', 'ppibfi_translate'); ?>" class="xcp_submit" />
 		
 	</div><!-- xcpinc -->

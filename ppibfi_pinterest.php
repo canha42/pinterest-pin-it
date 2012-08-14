@@ -53,35 +53,40 @@ function pibfi_Engine($content) {
 
 	$content = pibfi_Engine_normalize_image_paths( $content );
 
-	// Show on index.php / home page:
-	if (get_option('ppibfi_pg_index') == "on" && is_home()) {
-		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		if ($isOpted[0] != "on") {
-			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
-		}
-	}
-	
-	// Show on single.php:
-	elseif (get_option('ppibfi_pg_single') == "on" && is_single()) {
-		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		if ($isOpted[0] != "on") {
-			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
-		}
-	}
-	
-	// Show on page.php:
-	elseif (get_option('ppibfi_pg_page') == "on" && is_page()) {
-		$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
-		if ($isOpted[0] != "on"){
-			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
-		}
-	}
-	
-	// Show on category.php / archive.php:
-	elseif (get_option('ppibfi_pg_cat') == "on" && is_category()) {
+	// Show the pin just in images with the 'pinthis' class
+	if ( get_option('ppibfi_img_pinthis') == 'on' ) {
 		$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+	} else {
+
+		// Show on index.php / home page:
+		if (get_option('ppibfi_pg_index') == "on" && is_home()) {
+			$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
+			if ($isOpted[0] != "on") {
+				$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+			}
+		}
+		
+		// Show on single.php:
+		elseif (get_option('ppibfi_pg_single') == "on" && is_single()) {
+			$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
+			if ($isOpted[0] != "on") {
+				$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+			}
+		}
+		
+		// Show on page.php:
+		elseif (get_option('ppibfi_pg_page') == "on" && is_page()) {
+			$isOpted = get_post_meta($post->ID, 'xcp_optin_post');
+			if ($isOpted[0] != "on"){
+				$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+			}
+		}
+		
+		// Show on category.php / archive.php:
+		elseif (get_option('ppibfi_pg_cat') == "on" && is_category()) {
+			$content = pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+		}
 	}
-	
 	// Print out the content with the changes on images
 	return $content;
 }
@@ -131,7 +136,7 @@ function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 		$image_count++;
 	}
 	// Loop to check if any image has the 'needed' pin class: pinthis (pibfi_ShowButton)
-	$any_image_has_the_needed_pin_class = false;
+	$any_image_has_the_needed_pin_class = ( get_option('ppibfi_img_pinthis') == 'on' ) ? true : false;
 	for( $i=0; $i < sizeof( $images ); $i++ ){
 		$needed = pibfi_Engine_check_if_the_image_has_pinthis_class( $images[ $i ][ 'tag' ] );
 		if( $needed ){
@@ -179,11 +184,13 @@ function pibfi_Engine_check_if_the_image_has_the_forbidden_class( $tag ){
 		$forbidden_classes = explode( ',', $forbidden_classes );
 	}
 	foreach( $forbidden_classes as $class ){
-		// Regular expression to detect if the tag has the forbbiden class
-		preg_match( '/class=[\'"](.*)?' . trim( $class ) . '(.*)?[\'"]/i', $tag, $matches );
-		if( $matches ){
-			$has_forbidden_class = true;
-			break;
+		if( $class != '' ){
+			// Regular expression to detect if the tag has the forbbiden class
+			preg_match( '/class=[\'"](.*)?' . trim( $class ) . '(.*)?[\'"]/i', $tag, $matches );
+			if( pibfi_Util_the_array_has_content( $matches) ){
+				$has_forbidden_class = true;
+				break;
+			}
 		}
 	}
 	return !$has_forbidden_class;
