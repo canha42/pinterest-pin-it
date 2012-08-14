@@ -1,5 +1,5 @@
 === Pinterest Pin It Button For Images ===
-Contributors: canha
+Contributors: canha, pererinha, kortchnoi
 Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
@@ -19,7 +19,7 @@ The description goes automatically as the name of the post, and so does the link
 
 Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
-*Found any bugs? Head on to http://canha.net/bugs/ and report it, please*
+*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.* You can also help develop the plugin or just beta-test it. Check out the GitHub page: https://github.com/canha42/pinterest-pin-it
 
 Check out the new features in the Changelog.
 
@@ -43,7 +43,7 @@ Yes. Websites with many images per post or floating may present problems. If you
 Yes. I am constantly trying to make the plugin better, but as it's a free plugin I don't get much time to work on it. Please consider donating any spare change to help me work on this plugin more. Donations can be made at: http://desgn.me/pinterest
 
 = Where do I report bugs? =
-In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at http://canha.net/bugs/ 
+In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at https://github.com/canha42/pinterest-pin-it/issues (requires registry). 
 
 == Screenshots ==
 
@@ -59,6 +59,8 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Feature: Ability to set content width on plugin settings page.
 * Bug: "All pages" bug, selecting all checkboxes on screen.
 * Bug: Text shadow in plugin settings page removed
+* Feature: Plugin translation-ready
+* Feature: Exclude certain classes from showing the button (such as "wp-smiley")
 
 = 1.0 =
 * Released 2012-8-07
