@@ -16,7 +16,7 @@ function pibfi_Engine_configs() {
 		update_option('ppibfi_img_pinthis', $_POST['ppibfi_img_pinthis']);
 		update_option('ppibfi_opt_enable', $_POST['ppibfi_opt_enable']);
 		update_option('ppibfi_content_width', $_POST['ppibfi_content_width']);
-		update_option('pibfi_NoShowButton',explode(',', $_POST['ppibfi_exclude']));
+		update_option('pibfi_NoShowButton',explode(',', trim($_POST['ppibfi_exclude'],",")));
 		?><div class="updated"><p><strong><?php _e('Options saved.', 'ppibfi_translate'); ?></strong></p></div><?php
 	}
 	 
@@ -69,13 +69,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<label for="ppibfi_pg_page"><? _e('Page','ppibfi_translate'); ?> </label>
 			</p>	
 		</fieldset>
-		<fieldset>
-			<legend><? _e('All images with "pinthis" class:','ppibfi_translate'); ?> </legend>
-			<p>
-			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
-			<label for="ppibfi_img_pinthis"><? _e('Show the "Pin it" button only for the images with the "pinthis" class','ppibfi_translate'); ?> </label>
-			</p>
-		</fieldset>
+		
 		<fieldset>
 			<legend><? _e('Opt-out on single pages:','ppibfi_translate'); ?> </legend>
 			<p><? _e('Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page','ppibfi_translate'); ?> </p>
@@ -96,13 +90,22 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<input type="text" name="ppibfi_exclude" id="ppibfi_exclude" value="<?php foreach ($ppibfi_exclude as &$value) {echo $value.",";}?>" />
 		</fieldset>
 		
+		<fieldset>
+			<legend><? _e('Selected images only:','ppibfi_translate'); ?> </legend>
+			<p>
+			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
+			<label for="ppibfi_img_pinthis"><? _e('Show "Pin it" button only on images with "pinthis" class','ppibfi_translate'); ?> </label>
+			</p>
+			<p><? _e('This option will overide the "Exclude classes" and "Enable opt-out" options.','ppibfi_translate'); ?> </p>
+		</fieldset>
+		
 		<input type="submit" name="submit" value="<?php _e('Save', 'ppibfi_translate'); ?>" class="xcp_submit" />
 		
 		</form>
 	</div><!-- /xcpf (advanced) -->
 	<div class="xcpf">
 		<h3><? _e('Care to help?','ppibfi_translate'); ?> </h3>
-		<p><? _e('This plugin takes up a *lot* of my spare time. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.','ppibfi_translate'); ?> </p>
+		<p><? _e('This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.','ppibfi_translate'); ?> </p>
 		<p><? _e('If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don\'t have any "mad skillz", you can also help by reporting bugs at <a href="https://github.com/canha42/pinterest-pin-it/issues">GitHub</a>. Please help spread the word about this plugin!','ppibfi_translate'); ?> </p>
 		<p><? _e('Thanks!','ppibfi_translate'); ?> </p>
 		<div class="xcp_redes"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/pinterest-pin-it-button-for-images/" data-text="I'm using &quot;Pinterest Pin It Button For Images&quot; WP plugin on my site!" data-size="large" data-hashtags="pibfi">Tweet</a>

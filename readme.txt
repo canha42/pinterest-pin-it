@@ -35,12 +35,18 @@ Please consider donating any spare change to help me work on this plugin more. D
 
 == Frequently Asked Questions ==
 
-= Are there any know bugs? =
+= Where can I change the plugins settings? =
 
-Yes. Websites with many images per post or floating may present problems. If you have the "smileys" activated, those also may present problems. Opt-out only works on single and pages, not on index. Button can't be changed (yet!)
+After installed, go to your "Settings" menu and select "Pinterest Pin It". There, you'll have several settings you can change.
 
-= Are you going to solve these bugs? =
-Yes. I am constantly trying to make the plugin better, but as it's a free plugin I don't get much time to work on it. Please consider donating any spare change to help me work on this plugin more. Donations can be made at: http://desgn.me/pinterest
+= How do I add the button only to specific images? =
+On the plugin settings page, check the box under the "Advanced" section called "Show the 'Pin it' button only on images with 'pinthis' class". Head on to your post and edit it. If you are using HTML view: just add `class="pinthis"` to the image. If a "class" already exists, just add a space to the end of it and type `pinthis`. If you are using Visual view, click once on your image, select the "Edit image" button, click on the "Advanced settings" tab and add to the "CSS Class" field `pinthis`.
+
+= Images with specific classes shouldn't show the button. Can this be done? =
+Yes. In the plugin settings window, just type in the class you want to exclude from recieving the button. You can also use the default `nopin` class on your images.
+
+= Can I disable the button on all images of a post? =
+Yes. In the plugin settings window, select the "Enable opt-out" box and save. In your post editing, you will see a "Pinterest plugin" box to the right side of your window. There you can select "Disable Pinterest Pin it button on this page".
 
 = Where do I report bugs? =
 In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at https://github.com/canha42/pinterest-pin-it/issues (requires registry). 
@@ -49,10 +55,12 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 
 1. Button that shows on image hover
 2. New settings panel
+3. Button redirects to Pinterest, enabling the pinning.
 
 == Changelog ==
 
 = 1.0.1 =
+* Released 2012-8-15
 * Security: index.php file created, so directory won't be visible.
 * Security: PHP files protected from direct loading.
 * Feature: Warning is shown if content width is WordPress standard, or no width detected.
@@ -61,6 +69,7 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Bug: Text shadow in plugin settings page removed
 * Feature: Plugin translation-ready
 * Feature: Exclude certain classes from showing the button (such as "wp-smiley")
+* Feature: Only show button on images with "pinthis" class
 
 = 1.0 =
 * Released 2012-8-07
@@ -95,3 +104,4 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Open beta test
 
 == Upgrade Notice ==
+If you have made changes to the button, please make sure to back it up before updating.

@@ -47,8 +47,8 @@ include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 
 function pibfi_Engine($content) {
 	global $post;
-	$post_url = get_option('ppibfi_url'); //Get the post URL
-	$post_title = get_option('ppibfi_title'); //Get the post title
+	$post_url = get_permalink(); //Get the post URL
+	$post_title = get_the_title($ID); //Get the post title
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
 
 	$content = pibfi_Engine_normalize_image_paths( $content );
@@ -112,8 +112,8 @@ function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 		<img%1$ssrc="%2$s.%3$s"%4$s>
 			<span class="xc_pin" onclick="pin_this(event, \''.
 			$pinterest_base_url.
-			'?url='.urlencode($post_url).
-			'&media=%2$s.%3$s'.'&description='.urlencode($post_title).'\')">
+			'?url='.esc_url($post_url).
+			'&media=%2$s.%3$s'.'&description='.$post_title.'\')">
 			</span>
 		</span>';
 	// Regular expression that finds all post's images
@@ -265,11 +265,11 @@ if (!is_admin() && stripos($_SERVER['HTTP_USER_AGENT'], 'mobile') != true) {
 
 function xc_pin_intstall() {	
 	// On install, check if options exist. If not, set defaults 
-	if(get_option('ppibfi_pg_method') == false) update_option('ppibfi_pg_method', 'popup');
-	if(get_option('ppibfi_pg_index') == false) update_option('ppibfi_pg_index', 'on');
-	if(get_option('ppibfi_pg_single') == false) update_option('ppibfi_pg_single', 'on');
-	if(get_option('ppibfi_pg_page') == false) update_option('ppibfi_pg_page', 'on');
-	if(get_option('ppibfi_pg_cat') == false) update_option('ppibfi_pg_cat', 'on');
+	if(get_option('ppibfi_pg_method') != false) update_option('ppibfi_pg_method', 'popup');
+	if(get_option('ppibfi_pg_index') != false) update_option('ppibfi_pg_index', 'on');
+	if(get_option('ppibfi_pg_single') != false) update_option('ppibfi_pg_single', 'on');
+	if(get_option('ppibfi_pg_page') != false) update_option('ppibfi_pg_page', 'on');
+	if(get_option('ppibfi_pg_cat') != false) update_option('ppibfi_pg_cat', 'on');
 	$dontShowButtonsOn = array("wp-smiley", "nopin"); //Default classes to *ignore* the button
 	if(get_option('pibfi_NoShowButton') == false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
 	pibfi_CheckImagesWidth();
