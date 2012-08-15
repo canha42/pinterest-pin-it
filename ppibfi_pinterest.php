@@ -218,7 +218,7 @@ function pibfi_Util_the_array_has_content( $arr ){
 		if( is_array( $ar ) ){
 			return pibfi_Util_the_array_has_content( $ar );
 		} else {
-			if( $ar != '' ){
+			if( '' != $ar ){
 				return true;
 			}
 		}
@@ -244,8 +244,8 @@ function cWGlobal() {
 //Adds menu to WordPress dashboard
 function pibfi_Engine_menu() {
 	add_options_page(
-		'Pinterest Pin It Button For Images', //Page title
-		'Pinterest Pin It', //Menu name
+		__( 'Pinterest Pin It Button For Images', 'ppibfi_translate'), //Page title
+		__('Pinterest Pin It', 'ppibfi_translate'), //Menu name
 		'activate_plugins', //Who can see it
 		'pibfi_Engine_id', // Unique ID
 		'pibfi_Engine_configs', //The page
