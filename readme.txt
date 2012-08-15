@@ -1,10 +1,12 @@
+UNSTABLE COPY.
+
 === Pinterest Pin It Button For Images ===
 Contributors: canha, pererinha, kortchnoi
 Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
 Tested up to: 3.4.1
-Stable tag: 1.0.1
+Stable tag: 1.1-nightly
 License: GPLv2 or later
 
 Add a "Pin It" button over your images, so users can add it to Pinterest easily.

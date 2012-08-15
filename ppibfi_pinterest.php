@@ -1,11 +1,14 @@
 <?php
 /*
+UNSTABLE COPY. FOR DEVELOPMENT PURPOUSES ONLY
+
+
 Plugin Name: Pinterest Pin It Button For Images
 Plugin URI: http://www.canha.net
 Description: Displays a Pin It button directly over your images.
 Author: Canha
 Author URI: http://www.canha.net
-Version: 1.0.1
+Version: 1.1-nightly
 */
 
 if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_pinterest.php' == basename($_SERVER['SCRIPT_FILENAME'])) die ('Stop! Hammer time!'); //Plugin shouldn't be accessed directly
