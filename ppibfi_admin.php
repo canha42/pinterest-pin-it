@@ -5,109 +5,109 @@
 =====================
 */
 
-if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_admin.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
+if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_admin.php' == basename($_SERVER['SCRIPT_FILENAME'])) die ('Stop! Hammer time!');
 
 function pibfi_Engine_configs() {
-	if ( isset( $_POST['submit'] ) ) {
-		update_option( 'ppibfi_pg_index', $_POST['ppibfi_pg_index'] );
-		update_option( 'ppibfi_pg_single', $_POST['ppibfi_pg_single'] );
-		update_option( 'ppibfi_pg_page', $_POST['ppibfi_pg_page'] );
-		update_option( 'ppibfi_pg_cat', $_POST['ppibfi_pg_cat'] );
-		update_option( 'ppibfi_img_pinthis', $_POST['ppibfi_img_pinthis'] );
-		update_option( 'ppibfi_opt_enable', $_POST['ppibfi_opt_enable'] );
-		update_option( 'ppibfi_content_width', $_POST['ppibfi_content_width'] );
-		update_option( 'pibfi_NoShowButton', explode( ',', trim( $_POST['ppibfi_exclude'], "," ) ) );
-		?><div class="updated"><p><strong><?php _e( 'Options saved.', 'ppibfi_translate' ); ?></strong></p></div><?php
+	if (isset($_POST['submit'])) {
+		update_option('ppibfi_pg_index', $_POST['ppibfi_pg_index']);
+		update_option('ppibfi_pg_single', $_POST['ppibfi_pg_single']);
+		update_option('ppibfi_pg_page', $_POST['ppibfi_pg_page']);
+		update_option('ppibfi_pg_cat', $_POST['ppibfi_pg_cat']);
+		update_option('ppibfi_img_pinthis', $_POST['ppibfi_img_pinthis']);
+		update_option('ppibfi_opt_enable', $_POST['ppibfi_opt_enable']);
+		update_option('ppibfi_content_width', $_POST['ppibfi_content_width']);
+		update_option('pibfi_NoShowButton',explode(',', trim($_POST['ppibfi_exclude'],",")));
+		?><div class="updated"><p><strong><?php _e('Options saved.', 'ppibfi_translate'); ?></strong></p></div><?php
 	}
 
-	if ( "on" == get_option( 'ppibfi_pg_index' ) ) $xcp_index = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_single' ) ) $xcp_single = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_page' ) ) $xcp_page = 'checked';
-	if ( "on" == get_option( 'ppibfi_img_pinthis' ) ) $xcp_img = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_cat' ) ) $xcp_cat = 'checked';
-	if ( "on" == get_option( 'ppibfi_opt_enable' ) ) $xcp_opt_enable = 'checked';
-	$ppibfi_content_width = get_option( 'ppibfi_content_width' );
-	$ppibfi_exclude = get_option( 'pibfi_NoShowButton' );
+	if (get_option('ppibfi_pg_index') == "on") $xcp_index = 'checked';
+	if (get_option('ppibfi_pg_single') == "on") $xcp_single = 'checked';
+	if (get_option('ppibfi_pg_page') == "on") $xcp_page = 'checked';
+	if (get_option('ppibfi_img_pinthis') == "on") $xcp_img = 'checked';
+	if (get_option('ppibfi_pg_cat') == "on") $xcp_cat = 'checked';
+	if (get_option('ppibfi_opt_enable') == "on") $xcp_opt_enable = 'checked';
+	$ppibfi_content_width = get_option('ppibfi_content_width');
+	$ppibfi_exclude = get_option('pibfi_NoShowButton');
 ?>
 <script type="text/javascript">checked=false;
 function checkedAll () {var aa= document.getElementById('pinpages');checked = !checked;for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
 	<div class="wrap">
 
-		<h2><?php _e( 'Pinterest Pin It Button For Images', 'ppibfi_translate' ); ?></h2>
+		<h2>Pinterest Pin It Button For Images</h2>
 		<div class="xcpinc">
-		<p><?php _e( 'Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you).', 'ppibfi_translate' ); ?></p>
+		<p><?php _e('Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you).', 'ppibfi_translate'); ?></p>
 		<form method="post" action="#" id="frm1">
 
 		<fieldset>
-			<legend><?php _e( 'Content width:', 'ppibfi_translate' ); ?></legend>
-			<p><?php _e( 'The plugin needs to know the width of the content area in pixels to place the button (only numbers).', 'ppibfi_translate' ); ?> </p>
+			<legend><?php _e('Content width:','ppibfi_translate'); ?>	</legend>
+			<p><?php _e('The plugin needs to know the width of the content area in pixels to place the button (only numbers).','ppibfi_translate'); ?> </p>
 			<p>
-			<input type="number" name="ppibfi_content_width" id="ppibfi_content_width" value="<?php echo $ppibfi_content_width ?>" />
+			<input type="number" name="ppibfi_content_width" id="ppibfi_content_width" value="<?=$ppibfi_content_width?>" />
 			</p>
 		</fieldset>
 
 		<fieldset id="pinpages">
-			<legend><?php _e( 'Show "Pin It" button on following pages:', 'ppibfi_translate' ); ?> </legend>
+			<legend><?php _e('Show "Pin It" button on following pages:','ppibfi_translate'); ?> </legend>
 			<p>
 			<input type="checkbox" name="ppibfi_pg_all" id="ppibfi_pg_all" onclick="checkedAll();" />
-			<label for="ppibfi_pg_all"><?php _e( 'All pages', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_pg_all"><?php _e('All pages','ppibfi_translate'); ?> </label>
 			</p>
 			<p>
 			<input type="checkbox" name="ppibfi_pg_index" id="ppibfi_pg_index" <?=$xcp_index?> />
-			<label for="ppibfi_pg_index"><?php _e( 'Index / home', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_pg_index"><?php _e('Index / home','ppibfi_translate'); ?> </label>
 			</p>
 			<p>
 			<input type="checkbox" name="ppibfi_pg_single" id="ppibfi_pg_single" <?=$xcp_single?> />
-			<label for="ppibfi_pg_single"><?php _e( 'Single post', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_pg_single"><?php _e('Single post','ppibfi_translate'); ?> </label>
 			</p>
 			<p>
 			<input type="checkbox" name="ppibfi_pg_cat" id="ppibfi_pg_cat" <?=$xcp_cat?> />
-			<label for="ppibfi_pg_cat"><?php _e( 'Category page', 'ppibfi_translate' ); ?>	</label>
+			<label for="ppibfi_pg_cat"><?php _e('Category page','ppibfi_translate'); ?>	</label>
 			</p>
 			<p>
 			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?=$xcp_page?> />
-			<label for="ppibfi_pg_page"><?php _e( 'Page', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_pg_page"><?php _e('Page','ppibfi_translate'); ?> </label>
 			</p>
 		</fieldset>
 
 		<fieldset>
-			<legend><?php _e( 'Opt-out on single pages:','ppibfi_translate' ); ?> </legend>
-			<p><?php _e( 'Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page', 'ppibfi_translate' ); ?> </p>
+			<legend><?php _e('Opt-out on single pages:','ppibfi_translate'); ?> </legend>
+			<p><?php _e('Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page','ppibfi_translate'); ?> </p>
 			<p>
 			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?=$xcp_opt_enable?> />
-			<label for="ppibfi_opt_enable"><?php _e( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_opt_enable"><?php _e('Enable opt-out','ppibfi_translate'); ?> </label>
 			</p>
 		</fieldset>
 
-		<input type="submit" name="submit" value="<?php _e( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+		<input type="submit" name="submit" value="<?php _e('Save', 'ppibfi_translate'); ?>" class="xcp_submit" />
 
 	</div><!-- xcpinc -->
 	<div class="xcpf">
-		<h3><?php _e( 'Advanced', 'ppibfi_translate' ); ?> </h3>
+		<h3><?php _e('Advanced','ppibfi_translate'); ?> </h3>
 		<fieldset id="advanced">
-			<legend><?php _e( 'Exclude classes:', 'ppibfi_translate' ); ?> </legend>
-			<p><?php _e( 'Images with the following "class" attribute won\'t display the button (comma separated):', 'ppibfi_translate' ); ?> </p>
-			<input type="text" name="ppibfi_exclude" id="ppibfi_exclude" value="<?php foreach ( $ppibfi_exclude as &$value)  echo $value.','; ?>" />
+			<legend><?php _e('Exclude classes:','ppibfi_translate'); ?> </legend>
+			<p><?php _e('Images with the following "class" attribute won\'t display the button (comma separated):','ppibfi_translate'); ?> </p>
+			<input type="text" name="ppibfi_exclude" id="ppibfi_exclude" value="<?php foreach ($ppibfi_exclude as &$value) {echo $value.",";}?>" />
 		</fieldset>
 
 		<fieldset>
-			<legend><?php _e( 'Selected images only:', 'ppibfi_translate' ); ?> </legend>
+			<legend><?php _e('Selected images only:','ppibfi_translate'); ?> </legend>
 			<p>
 			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
-			<label for="ppibfi_img_pinthis"><?php _e( 'Show "Pin it" button only on images with "pinthis" class', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_img_pinthis"><?php _e('Show "Pin it" button only on images with "pinthis" class','ppibfi_translate'); ?> </label>
 			</p>
-			<p><?php _e( 'This option will overide the "Exclude classes" and "Enable opt-out" options.', 'ppibfi_translate' ); ?> </p>
+			<p><?php _e('This option will overide the "Exclude classes" and "Enable opt-out" options.','ppibfi_translate'); ?> </p>
 		</fieldset>
 
-		<input type="submit" name="submit" value="<?php _e( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+		<input type="submit" name="submit" value="<?php _e('Save', 'ppibfi_translate'); ?>" class="xcp_submit" />
 
 		</form>
 	</div><!-- /xcpf (advanced) -->
 	<div class="xcpf">
-		<h3><?php _e( 'Care to help?', 'ppibfi_translate' ); ?> </h3>
-		<p><?php _e( 'This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.', 'ppibfi_translate' ); ?> </p>
-		<p><?php _e( 'If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don\'t have any "mad skillz", you can also help by reporting bugs at <a href="https://github.com/canha42/pinterest-pin-it/issues">GitHub</a>. Please help spread the word about this plugin!', 'ppibfi_translate' ); ?> </p>
-		<p><?php _e( 'Thanks!', 'ppibfi_translate' ); ?> </p>
+		<h3><?php _e('Care to help?','ppibfi_translate'); ?> </h3>
+		<p><?php _e('This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.','ppibfi_translate'); ?> </p>
+		<p><?php _e('If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don\'t have any "mad skillz", you can also help by reporting bugs at <a href="https://github.com/canha42/pinterest-pin-it/issues">GitHub</a>. Please help spread the word about this plugin!','ppibfi_translate'); ?> </p>
+		<p><?php _e('Thanks!','ppibfi_translate'); ?> </p>
 		<div class="xcp_redes"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/pinterest-pin-it-button-for-images/" data-text="I'm using &quot;Pinterest Pin It Button For Images&quot; WP plugin on my site!" data-size="large" data-hashtags="pibfi">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
 		<div class="xcp_redes"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwordpress.org%2Fextend%2Fplugins%2Fpinterest-pin-it-button-for-images%2F&amp;send=false&amp;layout=box_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=127437144025252" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:90px;" allowTransparency="true"></iframe></div>
