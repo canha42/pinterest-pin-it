@@ -39,7 +39,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 		<form method="post" action="#" id="frm1">
 
 		<fieldset>
-			<legend><?php _e( 'Content width:', 'ppibfi_translate' ); ?></legend>
+			<legend><?php _e( 'Content width', 'ppibfi_translate' ); ?>:</legend>
 			<p><?php _e( 'The plugin needs to know the width of the content area in pixels to place the button (only numbers).', 'ppibfi_translate' ); ?> </p>
 			<p>
 			<input type="number" name="ppibfi_content_width" id="ppibfi_content_width" value="<?php echo $ppibfi_content_width ?>" />
@@ -53,19 +53,19 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<label for="ppibfi_pg_all"><?php _e( 'All pages', 'ppibfi_translate' ); ?> </label>
 			</p>
 			<p>
-			<input type="checkbox" name="ppibfi_pg_index" id="ppibfi_pg_index" <?=$xcp_index?> />
+			<input type="checkbox" name="ppibfi_pg_index" id="ppibfi_pg_index" <?php echo $xcp_index?> />
 			<label for="ppibfi_pg_index"><?php _e( 'Index / home', 'ppibfi_translate' ); ?> </label>
 			</p>
 			<p>
-			<input type="checkbox" name="ppibfi_pg_single" id="ppibfi_pg_single" <?=$xcp_single?> />
+			<input type="checkbox" name="ppibfi_pg_single" id="ppibfi_pg_single" <?php echo $xcp_single?> />
 			<label for="ppibfi_pg_single"><?php _e( 'Single post', 'ppibfi_translate' ); ?> </label>
 			</p>
 			<p>
-			<input type="checkbox" name="ppibfi_pg_cat" id="ppibfi_pg_cat" <?=$xcp_cat?> />
+			<input type="checkbox" name="ppibfi_pg_cat" id="ppibfi_pg_cat" <?php echo $xcp_cat?> />
 			<label for="ppibfi_pg_cat"><?php _e( 'Category page', 'ppibfi_translate' ); ?>	</label>
 			</p>
 			<p>
-			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?=$xcp_page?> />
+			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?php echo $xcp_page?> />
 			<label for="ppibfi_pg_page"><?php _e( 'Page', 'ppibfi_translate' ); ?> </label>
 			</p>
 		</fieldset>
@@ -74,7 +74,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<legend><?php _e( 'Opt-out on single pages:','ppibfi_translate' ); ?> </legend>
 			<p><?php _e( 'Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page', 'ppibfi_translate' ); ?> </p>
 			<p>
-			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?=$xcp_opt_enable?> />
+			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?php echo $xcp_opt_enable?> />
 			<label for="ppibfi_opt_enable"><?php _e( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
 			</p>
 		</fieldset>
@@ -93,7 +93,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 		<fieldset>
 			<legend><?php _e( 'Selected images only:', 'ppibfi_translate' ); ?> </legend>
 			<p>
-			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
+			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?php echo $xcp_img?> />
 			<label for="ppibfi_img_pinthis"><?php _e( 'Show "Pin it" button only on images with "pinthis" class', 'ppibfi_translate' ); ?> </label>
 			</p>
 			<p><?php _e( 'This option will overide the "Exclude classes" and "Enable opt-out" options.', 'ppibfi_translate' ); ?> </p>
