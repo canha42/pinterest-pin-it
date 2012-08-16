@@ -7,8 +7,13 @@
 
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_admin.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
 
-function pibfi_Engine_configs() {
-	if ( isset( $_POST['submit'] ) ) {
+add_action( 'admin_init', 'ppibfi_load_langs' );
+add_action( 'admin_enqueue_scripts', 'ppibfi_enqueue_scripts' );
+add_action( 'admin_print_scripts', 'ppibfi_media_script' );
+add_action( 'admin_init', 'ppibfi_replace_thickbox' );
+
+function pibfi_engine_configs() {
+	if ( ! empty( $_POST['submit']) && check_admin_referer('ppibfi_update_option','ppibfi_post_option') ) {
 		update_option( 'ppibfi_pg_index', $_POST['ppibfi_pg_index'] );
 		update_option( 'ppibfi_pg_single', $_POST['ppibfi_pg_single'] );
 		update_option( 'ppibfi_pg_page', $_POST['ppibfi_pg_page'] );
@@ -16,7 +21,16 @@ function pibfi_Engine_configs() {
 		update_option( 'ppibfi_img_pinthis', $_POST['ppibfi_img_pinthis'] );
 		update_option( 'ppibfi_opt_enable', $_POST['ppibfi_opt_enable'] );
 		update_option( 'ppibfi_content_width', $_POST['ppibfi_content_width'] );
-		update_option( 'pibfi_NoShowButton', explode( ',', trim( $_POST['ppibfi_exclude'], "," ) ) );
+		update_option( 'pibfi_no_show_button', explode( ',', trim( $_POST['ppibfi_exclude'], "," ) ) );
+		
+		if( filter_var( $_POST['ppibfi_chosen_image'], FILTER_VALIDATE_URL ) ) {
+			$img_path = parse_url( $_POST['ppibfi_chosen_image'], PHP_URL_PATH );
+			$img_full_path = get_home_path().$img_path;
+			if(file_exists($img_full_path)) {
+				$img_size = getimagesize($img_full_path);
+				update_option( 'ppibfi_img_button', array( 'file' => $img_path, 'width' => $img_size[0], 'height' => $img_size[1] ) );
+			}
+		}
 		?><div class="updated"><p><strong><?php _e( 'Options saved.', 'ppibfi_translate' ); ?></strong></p></div><?php
 	}
 
@@ -27,7 +41,7 @@ function pibfi_Engine_configs() {
 	if ( "on" == get_option( 'ppibfi_pg_cat' ) ) $xcp_cat = 'checked';
 	if ( "on" == get_option( 'ppibfi_opt_enable' ) ) $xcp_opt_enable = 'checked';
 	$ppibfi_content_width = get_option( 'ppibfi_content_width' );
-	$ppibfi_exclude = get_option( 'pibfi_NoShowButton' );
+	$ppibfi_exclude = get_option( 'pibfi_no_show_button' );
 ?>
 <script type="text/javascript">checked=false;
 function checkedAll () {var aa= document.getElementById('pinpages');checked = !checked;for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
@@ -78,7 +92,17 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<label for="ppibfi_opt_enable"><?php _e( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
 			</p>
 		</fieldset>
-
+		<fieldset>
+			<legend><?php _e( 'Choose a button to replace the default one','ppibfi_translate' ); ?> </legend>
+			<p>
+			<input id="upload_image_button" value="<?php _e( 'choose an image','ppibfi_translate' ); ?>" type="button" onclick="ppibfi_media_popup();" />
+			<input id="chosen_image" name="chosen_image" type="hidden" />
+			</p>
+			<p id="chosen_image_info" style="display:none"><strong><?php _e( 'Chosen image', 'ppibfi_translate' ); ?></strong><br />
+			<a id="chosen_image_link" href="" target="_blank"><img id="chosen_image_display" src="" /></a>
+			</p>
+		</fieldset>
+		<?php wp_nonce_field('ppibfi_update_option','ppibfi_post_option'); ?>
 		<input type="submit" name="submit" value="<?php _e( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
 
 	</div><!-- xcpinc -->
@@ -128,5 +152,57 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 
 	</div><!-- wrap -->
 <?php
-} //pibfi_Engine_configs
+} //pibfi_engine_configs
+
+function ppibfi_load_langs() {
+	load_plugin_textdomain( 'ppibfi_translate', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+}
+
+
+function ppibfi_media_script() {
+	echo "
+		<script type=\"text/javascript\">
+			function ppibfi_media_popup() {
+				window.send_to_editor = function(html) {
+					imgurl = jQuery('img',html).attr('src');
+					jQuery('#chosen_image').val(imgurl);
+					jQuery('#chosen_image_display').attr('src', imgurl);
+					jQuery('#chosen_image_link').attr('href', imgurl);
+					jQuery('#chosen_image_info').show();
+					tb_remove();
+				}
+
+				formfield = jQuery('#chosen_image').attr('name');
+				tb_show('', '".get_admin_url()."media-upload.php?type=image&tab=library&TB_iframe=true');
+				return false;
+			}
+		</script>";
+}
+
+function ppibfi_enqueue_scripts() {
+	wp_enqueue_script( 'jquery' );
+
+	wp_enqueue_script( 'thickbox' );
+	wp_enqueue_style( 'thickbox' );
+
+	wp_enqueue_script( 'media-upload' );
+}
+
+function ppibfi_replace_thickbox() {
+	global $pagenow;
+	if ( 'media-upload.php' == $pagenow || 'async-upload.php' == $pagenow ) {
+		add_filter( 'gettext', 'ppibfi_replace_thickbox_text' , 1, 2 );
+	}
+}
+
+function ppibfi_replace_thickbox_text( $translated_text, $text ) {
+	if ( 'Insert into Post' == $text || __('Insert into Post') == $text ) {
+		if ( false !== strpos( wp_get_referer(), 'pibfi_engine' ) ) {
+			return __( 'Use this image', 'ppibfi_translate' );
+		}
+	}
+
+	return $translated_text;
+}
+
 ?>

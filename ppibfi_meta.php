@@ -56,15 +56,15 @@ function xcp_optin_save( $post_id ) {
 */
 
 // Error messages if content width is not set or seems to be WP default:
-function pibfi_CheckContentWidth() {
+function pibifi_check_content_width() {
 
 	$standardImageW = get_option( 'large_size_w' );
 	$contentWidth = get_option( 'ppibfi_content_width' );
 	// Set to standard:
-	if ( '1024' == $standardImageW && ! $contentWidth ) add_action( 'admin_notices' , create_function( '', "echo '<div class=error><p>".__("Your maximum image width is thought to be 1024 pixels. <strong>This might be incorrect and might affect the functionality of the Pinterest Pin It plugin</strong>. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugins settings</a>", 'ppibfi_translate').".</p></div>';" ) );
+	if ( '1024' == $standardImageW && ! $contentWidth ) add_action( 'admin_notices' , create_function( '', "echo '<div class=error><p>".__("Your maximum image width is thought to be 1024 pixels. <strong>This might be incorrect and might affect the functionality of the Pinterest Pin It plugin</strong>. Please check the <a href=\"options-general.php?page=pibfi_engine_id\">plugins settings</a>", 'ppibfi_translate').".</p></div>';" ) );
 
 	// Non existent:
-	elseif ( ! $standardImageW && ! $contentWidth ) add_action('admin_notices' , create_function( '', "echo '<div class=error><p>".__("No maximum image width has been detected. This might affect the functionality of the <strong>Pinterest Pin It</strong> plugin. Please check the <a href=\"options-general.php?page=pibfi_Engine_id\">plugin settings</a>", 'ppibfi_translate')."</div>';" ) );
+	elseif ( ! $standardImageW && ! $contentWidth ) add_action('admin_notices' , create_function( '', "echo '<div class=error><p>".__("No maximum image width has been detected. This might affect the functionality of the <strong>Pinterest Pin It</strong> plugin. Please check the <a href=\"options-general.php?page=pibfi_engine_id\">plugin settings</a>", 'ppibfi_translate')."</div>';" ) );
 }
 
 function pibfi_CheckImagesWidth() {
