@@ -1,7 +1,7 @@
 UNSTABLE COPY.
 
 === Pinterest Pin It Button For Images ===
-Contributors: canha, pererinha, kortchnoi
+Contributors: canha, pererinha, vhf
 Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
@@ -21,7 +21,8 @@ The description goes automatically as the name of the post, and so does the link
 
 Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
-*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.* You can also help develop the plugin or just beta-test it. Check out the GitHub page: https://github.com/canha42/pinterest-pin-it
+*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.
+*You can also help develop the plugin or just beta-test it. Check out the GitHub page: https://github.com/canha42/pinterest-pin-it
 
 Check out the new features in the Changelog.
 
@@ -60,6 +61,13 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 3. Button redirects to Pinterest, enabling the pinning.
 
 == Changelog ==
+
+= 1.1 =
+* Unreased yet
+* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin !)
+* Feature: Upload your own "Pin It" button
+* Feature: Uninstalls properly, removing options and cleaning stuff after removal
+* Bug: Works with `short_open_tag` disabled
 
 = 1.0.1 =
 * Released 2012-8-15
