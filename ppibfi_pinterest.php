@@ -52,7 +52,7 @@ include( "ppibfi_meta.php" );  //Custom meta boxes for Posts and Pages
 function pibfi_engine( $content ) {
 	global $post;
 	$post_url = get_permalink(); //Get the post URL
-	$post_title = get_the_title( $ID ); //Get the post title
+	$post_title = get_the_title( $post->ID ); //Get the post title
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
 
 	$content = pibfi_engine_normalize_image_paths( $content );

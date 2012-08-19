@@ -34,12 +34,12 @@ function pibfi_engine_configs() {
 		?><div class="updated"><p><strong><?php _e( 'Options saved.', 'ppibfi_translate' ); ?></strong></p></div><?php
 	}
 
-	if ( "on" == get_option( 'ppibfi_pg_index' ) ) $xcp_index = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_single' ) ) $xcp_single = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_page' ) ) $xcp_page = 'checked';
-	if ( "on" == get_option( 'ppibfi_img_pinthis' ) ) $xcp_img = 'checked';
-	if ( "on" == get_option( 'ppibfi_pg_cat' ) ) $xcp_cat = 'checked';
-	if ( "on" == get_option( 'ppibfi_opt_enable' ) ) $xcp_opt_enable = 'checked';
+	$xcp_index = ( 'on' == get_option( 'ppibfi_pg_index' ) ) ? 'checked' : '';
+	$xcp_single = ( 'on' == get_option( 'ppibfi_pg_single' ) ) ? 'checked' : '';
+	$xcp_page = ( 'on' == get_option( 'ppibfi_pg_page' ) ) ? 'checked' : '';
+	$xcp_img = ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) ? 'checked' : '';
+	$xcp_cat = ( 'on' == get_option( 'ppibfi_pg_cat' ) ) ? 'checked' : '';
+	$xcp_opt_enable = ( 'on' == get_option( 'ppibfi_opt_enable' ) ) ? 'checked' : '';
 	$ppibfi_content_width = get_option( 'ppibfi_content_width' );
 	$ppibfi_exclude = get_option( 'pibfi_no_show_button' );
 ?>
