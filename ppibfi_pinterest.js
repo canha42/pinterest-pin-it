@@ -45,7 +45,7 @@ jQuery(window).ready(function(jQuery) {
 	
 });
 
-// By kortchnoi
+// By vhf
 function pin_this(e, url) {
 	jQuery(window).ready(function(jQuery) {
 		window.open(url, 'pinterest', 'screenX=100,screenY=100,height=580,width=730');

@@ -27,7 +27,8 @@ include( "ppibfi_meta.php" );  //Custom meta boxes for Posts and Pages
 	* Daniel Camargo (http://profiles.wordpress.org/pererinha) for the enormous help
 	* @link http://danielcamargo.com
 
-	* Victor (http://profiles.wordpress.org/kortchnoi) for the JS changes
+	* vhf/victor felder
+	* @link http://github.com/vhf
 
 	* Third Mind for giving an alternative to my script
 	* @link http://thirdmind.com
@@ -235,6 +236,58 @@ function cWGlobal() {
 	echo "<script type='text/javascript'> var ContentWidth = '".get_option( 'ppibfi_content_width' )."'; </script>\n";
 }
 
+function ppibfi_css() {
+	//Should not be the case if installed properly and nothing tricky done otherwise, but just in case. We don't want the CSS to be broken, as it's the main visible part !
+	//if( false === ($ppibfi_img_button = get_option( 'ppibfi_img_button' ) ) ) {
+		$ppibfi_img_button = array( 'file' => XCPIN_PATH.'ppibfi_button.png', 'width' => 80, 'height' => 50 );
+		update_option( 'ppibfi_img_button', $ppibfi_img_button );
+	//}
+
+echo '<style type="text/css">
+/*	-----------
+		BASE STYLES
+		-----------
+*/
+
+.pibfi_pinterest {
+	position: relative;
+	display: block;
+}
+.pibfi_pinterest .xc_pin {
+	/* Width and height of "Pin It" image button */
+	width: '.$ppibfi_img_button['width'].'px; height: '.$ppibfi_img_button['height'].'px;
+	/* Image button */
+	background-image: url("'.$ppibfi_img_button['file'].'"); background-repeat: none;
+	position: absolute;
+	top: 5px;
+	margin-left: -1px;
+	opacity: 0;
+	cursor: pointer;
+	display: none;
+}
+.pibfi_pinterest img.left + .xc_pin {
+	margin-left: 0;
+}
+
+/*	-----------------
+		INTERACTIONS / FX
+		-----------------
+*/
+
+.pibfi_pinterest .xc_pin,
+.pibfi_pinterest img {
+	-webkit-transition:opacity .2s ease-out; -moz-transition:opacity .2s ease-out; transition:opacity .2s ease-out;
+}
+.pibfi_pinterest img:hover + .xc_pin,
+.pibfi_pinterest_hover {
+	opacity: .7;
+}
+.pibfi_pinterest .xc_pin:hover {
+	opacity: 1;
+}</style>';
+
+}
+
 /*
 =======================
 	Admin functions
@@ -267,10 +320,10 @@ add_action( 'admin_menu', 'pibfi_engine_menu' );
 
 //Only run the script on the blog (i.e. not dashboard) and if the user is *not* accessing via mobile
 if ( ! is_admin() && ! stripos( $_SERVER['HTTP_USER_AGENT'], 'mobile' ) ) {
-	wp_enqueue_style( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest_styles.css.php' );
 	wp_enqueue_script( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.js', array( 'jquery' ) );
 	add_filter( 'the_content', 'pibfi_engine', 100 ); // The engine
 	add_action( 'wp_head', 'cWGlobal' ); // Add function to wp_head();
+	add_action( 'wp_head', 'ppibfi_css' ); // Add CSS to wp_head();
 }
 
 /*
@@ -286,7 +339,7 @@ function xc_pin_install() {
 	if( false === get_option( 'ppibfi_pg_single' ) ) update_option( 'ppibfi_pg_single', 'on' );
 	if( false === get_option( 'ppibfi_pg_page' ) ) update_option( 'ppibfi_pg_page', 'on' );
 	if( false === get_option( 'ppibfi_pg_cat' ) ) update_option( 'ppibfi_pg_cat', 'on' );
-	if( false === get_option( 'ppibfi_img_button' ) ) update_option( 'ppibfi_img_button', array( 'file' => 'ppibfi_button.png', 'width' => 80, 'height' => 50 ) );
+	if( false === get_option( 'ppibfi_img_button' ) ) update_option( 'ppibfi_img_button', array( 'file' => XCPIN_PATH.'ppibfi_button.png', 'width' => 80, 'height' => 50 ) );
 	$dont_show_buttons_on = array( "wp-smiley", "nopin" ); //Default classes to *ignore* the button
 	if( false === get_option( 'pibfi_no_show_button' ) ) update_option( 'pibfi_no_show_button', $dont_show_buttons_on );
 	pibfi_CheckImagesWidth();
