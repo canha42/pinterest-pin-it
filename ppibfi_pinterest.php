@@ -74,7 +74,7 @@ function pibfi_engine( $content ) {
 		// Show on single.php:
 		elseif ( 'on' == get_option( 'ppibfi_pg_single' ) && is_single() ) {
 			$isOpted = get_post_meta( $post->ID, 'xcp_optin_post' );
-			if ( isset( $isOpted[0] ) && 'on' != $isOpted[0] ) {
+			if ( 'on' != $isOpted[0] ) {
 				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 			}
 		}
@@ -109,9 +109,7 @@ function pibfi_engine_normalize_image_paths( $content ){
 }
 
 /* This function adds the pin at each post's image */
-function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ){
-	// I had to change this string in order to use the sprintf function.
-	// By vhf:
+function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ) {
 	$replacement = '
 		<span class="pibfi_pinterest">
 		<img%1$ssrc="%2$s.%3$s"%4$s>
@@ -149,9 +147,11 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 
 	// Loop to check if any image has the 'needed' pin class: pinthis (pibfi_ShowButton)
 	$any_image_has_the_needed_pin_class = ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) ? true : false;
+	
+	$pinthis_class = ( get_option( "pibfi_ShowButton" ) ) ? get_option( "pibfi_ShowButton" ) : 'pinthis';
 
-	for( $i=0; $i < sizeof( $images ); $i++ ){
-		$needed = pibfi_engine_check_if_the_image_has_pinthis_class( $images[ $i ][ 'tag' ] );
+	for( $i=0; $i < sizeof( $images ); $i++ ) {
+		$needed = pibfi_engine_img_tag_has_class( $images[ $i ][ 'tag' ], $pinthis_class );
 		if( $needed ){
 			$any_image_has_the_needed_pin_class = true;
 		}
@@ -166,70 +166,45 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 				$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
 				$content = str_replace( $image['tag'], $image_tag, $content );
 			}
-		} else {
-			// Check if the image should or shoudn't has the pin
-			if( pibfi_engine_check_if_the_image_has_the_forbidden_class( $image['tag'] ) ){
-				// If it shoud do the replacement
-				$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
-				$content = str_replace( $image['tag'], $image_tag, $content );
+		} else { // Check if the image should or shoudn't have the pin
+			$forbidden_classes = get_option( 'pibfi_no_show_button' );
+			
+			// If the option's value is a string explode it
+			if( ! is_array( $forbidden_classes ) ){
+				$forbidden_classes = explode( ',', $forbidden_classes );
+			}
+			if( ! empty( $forbidden_classes ) ) {
+				
+				if( ! pibfi_engine_img_tag_has_class( $image['tag'], $forbidden_classes ) ) {
+					// If image has not forbidden class, add pin-it button
+					$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
+					$content = str_replace( $image['tag'], $image_tag, $content );
+				}
 			}
 		}
 	}
 	return $content;
 }
 
-/* This function checks if the image has the 'pinthis' class  */
-function pibfi_engine_check_if_the_image_has_pinthis_class( $tag ){
-	$pinthis = ( get_option( "pibfi_ShowButton" ) ) ? get_option( "pibfi_ShowButton" ) : 'pinthis';
-	preg_match( '/class=[\'"](.*)?' . trim( $pinthis ) . '(.*)?[\'"]/i', $tag, $matches );
-	if( $matches && pibfi_util_the_array_has_content( $matches ) ){
-		return true;
-	}
-	return false;
-}
-
-/* This function checks if the image has a specific class, such as .wp-smiley, wp-thumb if it does the plugin shouldn't add the button to this particular image.  */
-function pibfi_engine_check_if_the_image_has_the_forbidden_class( $tag ) {
-	$has_forbidden_class = false;
-
-	// Array/String with not allowed css classes
-	$forbidden_classes = get_option( 'pibfi_no_show_button' );
-	print_r($forbidden_classes); print_r(htmlentities($tag));
-	// If the option's value is a string explode it
-	if( ! is_array( $forbidden_classes ) ){
-		$forbidden_classes = explode( ',', $forbidden_classes );
-	}
-	if( empty( $forbidden_classes ) ) {
+/* This function checks if the image tag $tag has class $class. $class could be an array as well  */
+function pibfi_engine_img_tag_has_class( $tag, $class ) {
+	$needle_classes = is_array($class) ? $class : array($class);
+		
+	preg_match( '/class=[\'"]([^\'"]*)[\'"]/i', $tag, $matches );
+	
+	if( empty( $matches[1] ) ) {
 		return false;
 	}
 	
-	//Should replace this heavy foreach by something like preg_match( '/class=[\'"](.*)?[' . implode('|', $forbidden_classes) . '](.*)?[\'"]/i', $tag, $matches );
-	//Should get rid of this useless and costing pibfi_Util_the_array_has_content(). Since we only care about whether it matches or not, if(preg_match()) is enough.
-	foreach( $forbidden_classes as $class ){
-		if( $class != '' ){
-			// Regular expression to detect if the tag has the forbbiden class
-			preg_match( '/class=[\'"](.*)?' . trim( $class ) . '(.*)?[\'"]/i', $tag, $matches );
-			if( pibfi_util_the_array_has_content( $matches ) ){
-				$has_forbidden_class = true;
-				break;
-			}
+	$haystack_classes = explode( ' ', $matches[1] );
+	
+	foreach( $needle_classes as $needle_class ){
+		if( in_array( $needle_class, $haystack_classes ) ) {
+			return true;
 		}
 	}
-	//Wait what ?! If has_forbidden_class is true, "blabla_has_the_forbidden_class()" returns false ?! Rename either the function or the variable.
-	return ! $has_forbidden_class;
-}
-
-/* This fuction checks if the array has any value or is just an empty array */
-function pibfi_util_the_array_has_content( $arr ){
-	foreach( $arr as $ar ){
-		if( is_array( $ar ) ){
-			return pibfi_util_the_array_has_content( $ar );
-		} else {
-			if( '' != $ar ){
-				return true;
-			}
-		}
-	}
+	
+	return false;
 }
 
 /*
