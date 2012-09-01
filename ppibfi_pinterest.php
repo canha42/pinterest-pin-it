@@ -58,7 +58,7 @@ function pibfi_engine( $content ) {
 
 	$content = pibfi_engine_normalize_image_paths( $content );
 
-	// Show the pin just in images with the 'pinthis' class
+	// Show the pin only on images with the 'pinthis' class
 	if ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) {
 		$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 	} else {
@@ -159,7 +159,7 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 	}
 
 	// Loop to replace the normal tag by the html with the pin, if it is necessary
-	foreach( $images as $image ){
+	foreach( $images as $image ) {
 		// If the post has any image with the (pibfi_ShowButton) class, the pin'll be showed in just these images
 		if( $any_image_has_the_needed_pin_class ){
 			if( $image[ 'pinthis' ] ){
@@ -174,9 +174,8 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 				$forbidden_classes = explode( ',', $forbidden_classes );
 			}
 			if( ! empty( $forbidden_classes ) ) {
-				
-				if( ! pibfi_engine_img_tag_has_class( $image['tag'], $forbidden_classes ) ) {
-					// If image has not forbidden class, add pin-it button
+				// If image has not forbidden class AND image has one of default WP inserted media tag, add pin-it button
+				if( ! pibfi_engine_img_tag_has_class( $image['tag'], $forbidden_classes ) and pibfi_engine_img_tag_is_wp_inserted( $image['tag'] ) ) {
 					$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
 					$content = str_replace( $image['tag'], $image_tag, $content );
 				}
@@ -189,21 +188,58 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 /* This function checks if the image tag $tag has class $class. $class could be an array as well  */
 function pibfi_engine_img_tag_has_class( $tag, $class ) {
 	$needle_classes = is_array($class) ? $class : array($class);
-		
+
 	preg_match( '/class=[\'"]([^\'"]*)[\'"]/i', $tag, $matches );
-	
+
 	if( empty( $matches[1] ) ) {
 		return false;
 	}
-	
+
 	$haystack_classes = explode( ' ', $matches[1] );
-	
+
 	foreach( $needle_classes as $needle_class ){
 		if( in_array( $needle_class, $haystack_classes ) ) {
 			return true;
 		}
 	}
+
+	return false;
+}
+
+
+/* This function checks if the image tag $tag has class $class. $class could be an array as well  */
+function pibfi_engine_img_tag_is_wp_inserted( $tag) {
+	$needle_classes = array(
+			'alignnone',
+			'alignleft',
+			'aligncenter',
+			'alignright',
+			'size-thumbnail',
+			'size-medium',
+			'size-full',
+			'attachment-thumbnail'
+	);
+
+	preg_match( '/class=[\'"]([^\'"]*)[\'"]/i', $tag, $matches );
+
+	if( empty( $matches[1] ) ) {
+		return false;
+	}
+
+	$haystack_classes = explode( ' ', $matches[1] );
+
+	foreach( $needle_classes as $needle_class ) {
+		if( in_array( $needle_class, $haystack_classes ) ) {
+			return true;
+		}
+	}
 	
+	foreach($haystack_classes as $class) {
+		if( preg_match( '/wp-image-[0-9]+/i', $class ) ) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
