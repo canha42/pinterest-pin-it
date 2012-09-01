@@ -74,7 +74,7 @@ function pibfi_engine( $content ) {
 		// Show on single.php:
 		elseif ( 'on' == get_option( 'ppibfi_pg_single' ) && is_single() ) {
 			$isOpted = get_post_meta( $post->ID, 'xcp_optin_post' );
-			if ( 'on' != $isOpted[0] ) {
+			if ( isset( $isOpted[0] ) && 'on' != $isOpted[0] ) {
 				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 			}
 		}
@@ -189,12 +189,12 @@ function pibfi_engine_check_if_the_image_has_pinthis_class( $tag ){
 }
 
 /* This function checks if the image has a specific class, such as .wp-smiley, wp-thumb if it does the plugin shouldn't add the button to this particular image.  */
-function pibfi_engine_check_if_the_image_has_the_forbidden_class( $tag ){
+function pibfi_engine_check_if_the_image_has_the_forbidden_class( $tag ) {
 	$has_forbidden_class = false;
 
 	// Array/String with not allowed css classes
 	$forbidden_classes = get_option( 'pibfi_no_show_button' );
-
+	print_r($forbidden_classes); print_r(htmlentities($tag));
 	// If the option's value is a string explode it
 	if( ! is_array( $forbidden_classes ) ){
 		$forbidden_classes = explode( ',', $forbidden_classes );
