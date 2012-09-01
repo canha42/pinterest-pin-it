@@ -1,6 +1,6 @@
 <?php
 /*
-UNSTABLE COPY. FOR DEVELOPMENT PURPOUSES ONLY
+UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY
 
 
 Plugin Name: Pinterest Pin It Button For Images
@@ -199,7 +199,12 @@ function pibfi_engine_check_if_the_image_has_the_forbidden_class( $tag ){
 	if( ! is_array( $forbidden_classes ) ){
 		$forbidden_classes = explode( ',', $forbidden_classes );
 	}
-
+	if( empty( $forbidden_classes ) ) {
+		return false;
+	}
+	
+	//Should replace this heavy foreach by something like preg_match( '/class=[\'"](.*)?[' . implode('|', $forbidden_classes) . '](.*)?[\'"]/i', $tag, $matches );
+	//Should get rid of this useless and costing pibfi_Util_the_array_has_content(). Since we only care about whether it matches or not, if(preg_match()) is enough.
 	foreach( $forbidden_classes as $class ){
 		if( $class != '' ){
 			// Regular expression to detect if the tag has the forbbiden class
@@ -210,6 +215,7 @@ function pibfi_engine_check_if_the_image_has_the_forbidden_class( $tag ){
 			}
 		}
 	}
+	//Wait what ?! If has_forbidden_class is true, "blabla_has_the_forbidden_class()" returns false ?! Rename either the function or the variable.
 	return ! $has_forbidden_class;
 }
 
