@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pin It Button For Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-15 21:33+0100\n"
-"PO-Revision-Date: 2012-08-16 01:31+0100\n"
+"POT-Creation-Date: 2012-09-01 17:54+0100\n"
+"PO-Revision-Date: 2012-09-01 17:59+0100\n"
 "Last-Translator: Victor Felder <victorfelder@gmail.com>\n"
 "Language-Team: vhf\n"
 "Language: English\n"
@@ -11,117 +11,203 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
-"X-Poedit-Basepath: D:\\Eclipse\\pinterest\\src\\pinterest-pin-it\\\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SearchPath-0: D:\\Eclipse\\pinterest\\src\\pinterest-pin-it\n"
+"X-Poedit-Basepath: /home/victor/Projets/pinterest/pinterest-pin-it\n"
+"X-Poedit-SearchPath-0: /home/victor/Projets/pinterest/pinterest-pin-it\n"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:20
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:36
 msgid "Options saved."
 msgstr "Options enregistrées."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:36
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:52
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_pinterest.php:317
 msgid "Pinterest Pin It Button For Images"
 msgstr "Bouton Pinterest \"Pin It\" sur vos images."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:38
-msgid "Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you)."
-msgstr "Vous pouvez ici paramétrer le plugin, même si cela n'est pas nécessaire (nous avons déjà tout optimisé pour vous !)."
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:54
+msgid ""
+"Here you may change some settings for your Pinterest PIBFI plugin, although "
+"it is not necessary (we already have the optimal settings done for you)."
+msgstr ""
+"Vous pouvez ici paramétrer le plugin, même si cela n'est pas nécessaire "
+"(nous avons déjà tout optimisé pour vous !)."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:42
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:58
 msgid "Content width"
 msgstr "Largeur du contenu"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:43
-msgid "The plugin needs to know the width of the content area in pixels to place the button (only numbers)."
-msgstr "Le plugin a besoin de connaître la largeur de la zone de contenu, en pixel, afin d'y placer le bouton. (Entrer un nombre.)"
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:59
+msgid ""
+"The plugin needs to know the width of the content area in pixels to place "
+"the button (only numbers)."
+msgstr ""
+"Le plugin a besoin de connaître la largeur de la zone de contenu, en pixel, "
+"afin d'y placer le bouton. (Entrer un nombre.)"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:50
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:66
 msgid "Show \"Pin It\" button on following pages:"
 msgstr "Ne montrer le bouton \"Pin It\" que sur les pages suivantes :"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:53
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:69
 msgid "All pages"
 msgstr "Toutes les pages"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:57
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:73
 msgid "Index / home"
 msgstr "Index / Accueil"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:61
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:77
 msgid "Single post"
 msgstr "Article seul"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:65
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:81
 msgid "Category page"
 msgstr "Page de catégorie"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:69
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:85
 msgid "Page"
 msgstr "Page"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:74
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:90
 msgid "Opt-out on single pages:"
 msgstr "Ne pas afficher sur les pages suivantes :"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:75
-msgid "Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page"
-msgstr "Sur chaque article et page, afficher une case à cocher permettant de désactiver le plugin sur cet article/page spécifique."
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:91
+msgid ""
+"Option to enable a checkbox on singles and pages that will let you choose if "
+"the plugin will be deactivated on that particular page"
+msgstr ""
+"Sur chaque article et page, afficher une case à cocher permettant de "
+"désactiver le plugin sur cet article/page spécifique."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:78
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:94
 msgid "Enable opt-out"
 msgstr "Désactiver le boutton au cas par cas."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:82
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:102
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:98
+msgid "Choose a button to replace the default one"
+msgstr "Choisissez une image pour remplacer le bouton par défaut"
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:100
+msgid "choose an image"
+msgstr "Choisissez une image"
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:103
+msgid "Chosen image"
+msgstr "Image choisie"
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:108
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:128
 msgid "Save"
 msgstr "Enregistrer"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:86
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:112
 msgid "Advanced"
 msgstr "Avancé"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:88
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:114
 msgid "Exclude classes:"
 msgstr "Exclure les classes CSS suivantes :"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:89
-msgid "Images with the following \"class\" attribute won't display the button (comma separated):"
-msgstr "Les images portant l'attribut class suivant n'afficheront pas le bouton (séparés par une virgule) :"
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:115
+msgid ""
+"Images with the following \"class\" attribute won't display the button "
+"(comma separated):"
+msgstr ""
+"Les images portant l'attribut class suivant n'afficheront pas le bouton "
+"(séparés par une virgule) :"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:94
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:120
 msgid "Selected images only:"
 msgstr "Seulement certaines images :"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:97
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:123
 msgid "Show \"Pin it\" button only on images with \"pinthis\" class"
-msgstr "Ne montrer le bouton \"Pin It\" que sur les images ayant la classe \"pinthis\"."
+msgstr ""
+"Ne montrer le bouton \"Pin It\" que sur les images ayant la classe \"pinthis"
+"\"."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:99
-msgid "This option will overide the \"Exclude classes\" and \"Enable opt-out\" options."
-msgstr "Cette option annulera l'effet des options \"Exclure les classes CSS suivantes\" et \"Désactiver le boutton au cas par cas.\"."
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:125
+msgid ""
+"This option will overide the \"Exclude classes\" and \"Enable opt-out\" "
+"options."
+msgstr ""
+"Cette option annulera l'effet des options \"Exclure les classes CSS suivantes"
+"\" et \"Désactiver le boutton au cas par cas.\"."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:107
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:133
 msgid "Care to help?"
 msgstr "Envie d'aider ?"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:108
-msgid "This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it'll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below."
-msgstr "Le développement de ce plugin me demande beaucoup de temps libre et me coûte cher. N'importe quelle donation (par exemple 5€) sera grandement appréciée et me donnera encore plus de raisons de travailler dûr sur de futures mises à jour. Pensez-y ! Lien PayPal ci-dessous."
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:134
+msgid ""
+"This plugin takes up a *lot* of my spare time and has cost me around US$ 500 "
+"in development out of my own pocket. Any donation amount (like five bucks) "
+"will be well appreciated as it'll give me more reason to work hard on new "
+"updates. Please consider donating! Link to PayPal below."
+msgstr ""
+"Le développement de ce plugin me demande beaucoup de temps libre et me coûte "
+"cher. N'importe quelle donation (par exemple 5€) sera grandement appréciée "
+"et me donnera encore plus de raisons de travailler dûr sur de futures mises "
+"à jour. Pensez-y ! Lien PayPal ci-dessous."
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:109
-msgid "If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don't have any \"mad skillz\", you can also help by reporting bugs at <a href=\"https://github.com/canha42/pinterest-pin-it/issues\">GitHub</a>. Please help spread the word about this plugin!"
-msgstr "Si vous êtes développeur et avez envie d'aider au développement de ce plugin, envoyez-moi un mail à canha (at) design.blog.br. Mais si vous n'avez pas cet \"incroyable talent\", vous pouvez toujours être utile en rapportant les bogues sur <a href=\"https://github.com/canha42/pinterest-pin-it/issues\">GitHub</a>. Et en parlant de ce plugin autour de vous !"
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:135
+msgid ""
+"If you are a programmer willing to help out with the development, please "
+"drop me a line at canha (at) design.blog.br. But if you don't have any \"mad "
+"skillz\", you can also help by reporting bugs at <a href=\"https://github."
+"com/canha42/pinterest-pin-it/issues\">GitHub</a>. Please help spread the "
+"word about this plugin!"
+msgstr ""
+"Si vous êtes développeur et avez envie d'aider au développement de ce "
+"plugin, envoyez-moi un mail à canha (at) design.blog.br. Mais si vous n'avez "
+"pas cet \"incroyable talent\", vous pouvez toujours être utile en rapportant "
+"les bogues sur <a href=\"https://github.com/canha42/pinterest-pin-it/issues"
+"\">GitHub</a>. Et en parlant de ce plugin autour de vous !"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:110
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:136
 msgid "Thanks!"
 msgstr "Merci !"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:13
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:201
+msgid "Insert into Post"
+msgstr ""
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_admin.php:203
+msgid "Use this image"
+msgstr "Utiliser cette image"
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:13
 msgid "Pinterest plugin"
 msgstr "Plugin Pinterest"
 
-#: /home/victor/Dropbox/Perso/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:33
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:33
 msgid "Disable Pinterest Pin It button on this page"
 msgstr "Désactiver le bouton Pinterest \"Pin It\" sur cette page."
 
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:64
+msgid ""
+"Your maximum image width is thought to be 1024 pixels. <strong>This might be "
+"incorrect and might affect the functionality of the Pinterest Pin It plugin</"
+"strong>. Please check the <a href=\"options-general.php?page=pibfi_engine_id"
+"\">plugins settings</a>"
+msgstr ""
+"La largeur maximale de vos images est actuellement 1024px. <strong>Si ce "
+"n'est pas le cas, cela pourrait affecter le fonctionnement de l'extension "
+"Pinterest Pin It.</strong> Vérifiez la <a href=\"options-general.php?"
+"page=pibfi_engine_id\">configuration de l'extension</a>."
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_meta.php:67
+msgid ""
+"No maximum image width has been detected. This might affect the "
+"functionality of the <strong>Pinterest Pin It</strong> plugin. Please check "
+"the <a href=\"options-general.php?page=pibfi_engine_id\">plugin settings</a>"
+msgstr ""
+"Vous n'avez pas indiqué la largeur maximale des images affichées sur votre "
+"blog. Cela pourrait affecter le bon fonctionnement de l'extension "
+"<strong>Pinterest Pin It</strong>. Vérifiez la <a href=\"options-general.php?"
+"page=pibfi_engine_id\">configuration de l'extension</a>."
+
+#: /home/victor/Projets/pinterest/pinterest-pin-it/ppibfi_pinterest.php:318
+#, fuzzy
+msgid "Pinterest Pin It"
+msgstr "Plugin Pinterest"
