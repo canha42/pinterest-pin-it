@@ -176,7 +176,6 @@ function ppibfi_media_script() {
 
 				formfield = jQuery('#chosen_image').attr('name');
 				tb_show('', '".get_admin_url()."media-upload.php?type=image&tab=library&TB_iframe=true');
-				$('#TB_iframeContent').get(0).contentWindow.location.reload();
 				return false;
 			}
 		</script>";
