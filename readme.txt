@@ -63,11 +63,14 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 == Changelog ==
 
 = 1.1 =
-* Unreased yet
-* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin !)
+* Unreased yet
+* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this pluginï¿½!)
 * Feature: Upload your own "Pin It" button
 * Feature: Uninstalls properly, removing options and cleaning stuff after removal
-* Bug: Works with `short_open_tag` disabled
+* Bugfix: Now works with `short_open_tag` disabled
+* Bugfix: Now option fields are sanitized
+* Bugfix: Exclude- and opt-in- classes now correctly detected
+* Bugfix: Button won't show on non-WP-inserted images (i.e. other social media icons, "buy this" buttons, etc.) anymore
 
 = 1.0.1 =
 * Released 2012-8-15
