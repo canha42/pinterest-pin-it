@@ -17,7 +17,7 @@ define("XCPIN_NAME", "Pinterest Pin It Button For Images");
 include("ppibfi_admin.php"); //Config page
 include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 	 
-/** 
+/**
 	* Special thanks:
 
 	* Daniel Camargo (http://profiles.wordpress.org/pererinha) for the enormous help
@@ -35,11 +35,11 @@ include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 	
 	* Every one who has been reporting bugs.
 	
-	* Super special thanks: to YOU, for donating *wink, wink*	
+	* Super special thanks: to YOU, for donating *wink, wink*
 */
 
 
-/* 
+/*
 ==============
 	Engine
 ==============
@@ -97,7 +97,7 @@ function pibfi_Engine_normalize_image_paths( $content ){
 	preg_match_all('/<img(.*?)src=[\'"](.*?)[\'"](.*?)>/i', $content, $matches);
 	foreach($matches[2] as $match){
 		if($match{0} == "/"){
-			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);	
+			$content = str_replace($match, get_bloginfo("siteurl") . $match, $content);
 		}
 	}
 	return $content;
@@ -118,7 +118,7 @@ function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 		</span>';
 	// Regular expression that finds all post's images
 	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
-	// Array to store the images that matches 
+	// Array to store the images that matches
 	$matches = array();
 	// Execute the regular expression
 	preg_match_all($pattern, $content, $matches);
@@ -142,7 +142,7 @@ function pibfi_Engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 		if( $needed ){
 			$any_image_has_the_needed_pin_class = true;
 		}
-		$images[ $i ][ 'pinthis' ] = $needed; 
+		$images[ $i ][ 'pinthis' ] = $needed;
 	}
 	// Loop to replace the normal tag by the html with the pin, if it is necessary
 	foreach( $images as $image ){
@@ -183,6 +183,12 @@ function pibfi_Engine_check_if_the_image_has_the_forbidden_class( $tag ){
 	if( !is_array( $forbidden_classes ) ){
 		$forbidden_classes = explode( ',', $forbidden_classes );
 	}
+	if( empty( $forbidden_classes ) ) {
+		return false;
+	}
+	
+	// Should replace this heavy foreach by something like preg_match( '/class=[\'"](.*)?[' . implode('|', $forbidden_classes) . '](.*)?[\'"]/i', $tag, $matches );
+	// Should get rid of this useless and costing pibfi_Util_the_array_has_content(). Since we only care about whether it matches or not, if(preg_match()) is enough.
 	foreach( $forbidden_classes as $class ){
 		if( $class != '' ){
 			// Regular expression to detect if the tag has the forbbiden class
@@ -193,6 +199,7 @@ function pibfi_Engine_check_if_the_image_has_the_forbidden_class( $tag ){
 			}
 		}
 	}
+	//Wait what ?! If has_forbidden_class is true, "blabla_has_the_forbidden_class()" returns false ?! Rename either the function or the variable.
 	return !$has_forbidden_class;
 }
 
@@ -209,7 +216,7 @@ function pibfi_Util_the_array_has_content( $arr ){
 	}
 }
 
-/* 
+/*
 =========================
 	Add to wp_head();
 =========================
@@ -219,7 +226,7 @@ function cWGlobal() {
 	echo "<script type='text/javascript'> var ContentWidth = '".get_option('ppibfi_content_width')."'; </script>\n";
 }
 
-/* 
+/*
 =======================
 	Admin functions
 =======================
@@ -240,7 +247,7 @@ function pibfi_Engine_menu() {
 //Show the config page for the plugin in dashboard
 if (is_admin()) {
 	pibfi_CheckContentWidth();
-	wp_enqueue_style('pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css'); 
+	wp_enqueue_style('pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css');
 	if (get_option('ppibfi_opt_enable') == "on") add_action( 'add_meta_boxes', 'xcp_optin' ); //ppibfi_meta.php
 	
 }
@@ -251,30 +258,30 @@ add_action('admin_menu', 'pibfi_Engine_menu');
 
 //Only run the script on the blog (i.e. not dashboard) and if the user is *not* accessing via mobile
 if (!is_admin() && stripos($_SERVER['HTTP_USER_AGENT'], 'mobile') != true) {
-	wp_enqueue_style('pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.css'); 
-	wp_enqueue_script('pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.js', array('jquery')); 
+	wp_enqueue_style('pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.css');
+	wp_enqueue_script('pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.js', array('jquery'));
 	add_filter('the_content', 'pibfi_Engine', 100); // The engine
 	add_action('wp_head', 'cWGlobal'); // Add function to wp_head();
 }
 
-/* 
+/*
 ===============
 	Install
 ===============
 */
 
-function xc_pin_intstall() {	
-	// On install, check if options exist. If not, set defaults 
-	if(get_option('ppibfi_pg_method') != false) update_option('ppibfi_pg_method', 'popup');
-	if(get_option('ppibfi_pg_index') != false) update_option('ppibfi_pg_index', 'on');
-	if(get_option('ppibfi_pg_single') != false) update_option('ppibfi_pg_single', 'on');
-	if(get_option('ppibfi_pg_page') != false) update_option('ppibfi_pg_page', 'on');
-	if(get_option('ppibfi_pg_cat') != false) update_option('ppibfi_pg_cat', 'on');
+function ppibfi_install() {
+	// On install, check if options exist. If not, set defaults
+	if(get_option('ppibfi_pg_method')!== false) update_option('ppibfi_pg_method', 'popup');
+	if(get_option('ppibfi_pg_index')!== false) update_option('ppibfi_pg_index', 'on');
+	if(get_option('ppibfi_pg_single')!== false) update_option('ppibfi_pg_single', 'on');
+	if(get_option('ppibfi_pg_page')!== false) update_option('ppibfi_pg_page', 'on');
+	if(get_option('ppibfi_pg_cat')!== false) update_option('ppibfi_pg_cat', 'on');
 	$dontShowButtonsOn = array("wp-smiley", "nopin"); //Default classes to *ignore* the button
-	if(get_option('pibfi_NoShowButton') == false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
+	if(get_option('pibfi_NoShowButton') === false) update_option('pibfi_NoShowButton', $dontShowButtonsOn);
 	pibfi_CheckImagesWidth();
 }
 
 // Run hook:
-register_activation_hook(__FILE__,'xc_pin_intstall');
+register_activation_hook(__FILE__,'ppibfi_install');
 ?>
