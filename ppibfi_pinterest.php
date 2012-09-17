@@ -5,12 +5,12 @@ Plugin URI: http://www.canha.net
 Description: Displays a Pin It button directly over your images.
 Author: Canha
 Author URI: http://www.canha.net
-Version: 1.0.1
+Version: 1.0.2
 */
 
 if (!empty($_SERVER['SCRIPT_FILENAME']) && 'ppibfi_pinterest.php' == basename($_SERVER['SCRIPT_FILENAME'])) die ('Stop! Hammer time!'); //Plugin shouldn't be accessed directly
 
-define("XCPIN_VERSION", "1.0.1");
+define("XCPIN_VERSION", "1.0.2");
 define("XCPIN_PATH", WP_PLUGIN_URL . "/" . plugin_basename( dirname(__FILE__) ) . "/" );
 define("XCPIN_NAME", "Pinterest Pin It Button For Images");
 
@@ -23,7 +23,8 @@ include("ppibfi_meta.php"); //Custom meta boxes for Posts and Pages
 	* Daniel Camargo (http://profiles.wordpress.org/pererinha) for the enormous help
 	* @link http://danielcamargo.com
 	
-	* Victor (http://profiles.wordpress.org/kortchnoi) for the JS changes
+	* vhf/victor felder for the constant help with the code
+	* @link http://github.com/vhf
 		
 	* Third Mind for giving an alternative to my script
 	* @link http://thirdmind.com

@@ -1,10 +1,10 @@
 === Pinterest Pin It Button For Images ===
-Contributors: canha, pererinha, kortchnoi
+Contributors: canha, pererinha, vhf
 Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
-Requires at least: 3.2.1
-Tested up to: 3.4.1
-Stable tag: 1.0.1
+Requires at least: 3.4.1
+Tested up to: 3.4.2
+Stable tag: 1.0.2
 License: GPLv2 or later
 
 Add a "Pin It" button over your images, so users can add it to Pinterest easily.
@@ -19,7 +19,7 @@ The description goes automatically as the name of the post, and so does the link
 
 Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
-*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.* You can also help develop the plugin or just beta-test it. Check out the GitHub page: https://github.com/canha42/pinterest-pin-it
+*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.* Or head in to the forums and leave your report there: http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images. You can also help develop the plugin or just beta-test it. *Please avoid contacting me via e-mail or thru my porfolio page*
 
 Check out the new features in the Changelog.
 
@@ -51,6 +51,12 @@ Yes. In the plugin settings window, select the "Enable opt-out" box and save. In
 = Where do I report bugs? =
 In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at https://github.com/canha42/pinterest-pin-it/issues (requires registry). 
 
+= Can I send you an e-mail? =
+If possible, please don't. Many other may have the same issues as you, so the forum is the best place to send them to.
+
+= Is there any conflict with other plugins? =
+Yes. Conflicts have been noticed on blogs using "Social Sharing Toolkit". At the moment, there is no plan to fix this.
+
 == Screenshots ==
 
 1. Button that shows on image hover
@@ -58,6 +64,11 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 3. Button redirects to Pinterest, enabling the pinning.
 
 == Changelog ==
+
+= 1.0.2 =
+* Released 2012-9-13
+* Bug: HTML code in "Exclude classes" causing crashes. Fixed.
+* Acknowledged: Conflict with "Social Sharing Toolkit". No fix.
 
 = 1.0.1 =
 * Released 2012-8-15
