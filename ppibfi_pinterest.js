@@ -1,4 +1,4 @@
-jQuery(window).ready(function(jQuery) {
+jQuery(window).load(function() {
 	jQuery('.pibfi_pinterest').each(function(index, element) {
 		var	$this = jQuery(this),
 				$theImage = jQuery($this.find('img:first-child')[0]),
