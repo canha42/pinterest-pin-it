@@ -30,7 +30,9 @@ jQuery(window).load(function() {
 		}
 		$theButton.css('left', newPosition);
 		$theButton.css('display', 'block');
-	});	
+
+        $this.css('width', theImageWidth);
+	});
 	
 	//Trigger when user hovers over the Pin It button (little FX)
 	jQuery('.xc_pin').hover
