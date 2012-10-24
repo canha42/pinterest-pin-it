@@ -192,7 +192,7 @@ function pibfi_engine_img_tag_has_class( $tag, $class ) {
 		return false;
 	}
 	
-	$haystack_classes = explode( ' ', $matches[1] );
+	$haystack_classes = explode( ' ', trim($matches[1]) );
 	
 	foreach( $needle_classes as $needle_class ){
 		if( in_array( $needle_class, $haystack_classes ) ) {
