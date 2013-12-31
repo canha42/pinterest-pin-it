@@ -118,6 +118,7 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 			$pinterest_base_url.
 			'?url='.esc_url( $post_url ).
 			'&media=%2$s.%3$s'.'&description='.$post_title.'\')">
+			'&amp;media=%2$s.%3$s'.'&amp;description='.$post_title.'\')">
 			</span>
 		</span>';
 
