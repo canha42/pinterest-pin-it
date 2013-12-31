@@ -23,7 +23,7 @@ function pibfi_engine_configs() {
 		update_option( 'ppibfi_content_width', (int) $_POST['ppibfi_content_width'] );
 		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
-		update_option( 'pibfi_NoShowButton', $exclude_posts );
+		update_option( 'pibfi_no_show_button', $exclude_posts );
 		
 		if( filter_var( $_POST['ppibfi_chosen_image'], FILTER_VALIDATE_URL ) ) {
 			$img_path = parse_url( $_POST['ppibfi_chosen_image'], PHP_URL_PATH );
