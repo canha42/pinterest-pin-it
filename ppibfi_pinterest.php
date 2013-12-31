@@ -14,7 +14,7 @@ Version: 1.1-nightly
 //Plugin shouldn't be accessed directly
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_pinterest.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
 
-define( "XCPIN_VERSION", "1.0.1" );
+define( "XCPIN_VERSION", "1.1" );
 define( "XCPIN_PATH", WP_PLUGIN_URL . "/" . plugin_basename( dirname( __FILE__ ) ) . "/" );
 define( "XCPIN_NAME", "Pinterest Pin It Button For Images" );
 
@@ -88,7 +88,6 @@ function pibfi_engine( $content ) {
 		}
 
 		// Show on category.php / archive.php:
-		elseif ( 'on' == get_option( 'ppibfi_pg_cat' ) && is_category() ) {
 		elseif ( 'on' == get_option( 'ppibfi_pg_cat' ) && is_category() || is_archive() || is_search() || is_author()) {
 			$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 		}
@@ -117,7 +116,6 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 			<span class="xc_pin" onclick="pin_this(event, \''.
 			$pinterest_base_url.
 			'?url='.esc_url( $post_url ).
-			'&media=%2$s.%3$s'.'&description='.$post_title.'\')">
 			'&amp;media=%2$s.%3$s'.'&amp;description='.$post_title.'\')">
 			</span>
 		</span>';
@@ -340,7 +338,7 @@ add_action( 'admin_menu', 'pibfi_engine_menu' );
 //Only run the script on the blog (i.e. not dashboard) and if the user is *not* accessing via mobile
 if ( ! is_admin() && ! stripos( $_SERVER['HTTP_USER_AGENT'], 'mobile' ) ) {
 	wp_enqueue_script( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.js', array( 'jquery' ) );
-	add_filter( 'the_content', 'pibfi_engine', 100 ); // The engine
+	add_filter( 'the_content', 'pibfi_engine', 98 ); // The engine
 	add_action( 'wp_head', 'cWGlobal' ); // Add function to wp_head();
 	add_action( 'wp_head', 'ppibfi_css' ); // Add CSS to wp_head();
 }
