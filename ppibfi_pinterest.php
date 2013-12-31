@@ -89,6 +89,7 @@ function pibfi_engine( $content ) {
 
 		// Show on category.php / archive.php:
 		elseif ( 'on' == get_option( 'ppibfi_pg_cat' ) && is_category() ) {
+		elseif ( 'on' == get_option( 'ppibfi_pg_cat' ) && is_category() || is_archive() || is_search() || is_author()) {
 			$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
 		}
 	}
