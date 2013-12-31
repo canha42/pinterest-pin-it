@@ -110,6 +110,7 @@ function pibfi_engine_normalize_image_paths( $content ){
 
 /* This function adds the pin at each post's image */
 function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ) {
+	$post_title = pibfi_replace_chars( $post_title );
 	$replacement = '
 		<span class="pibfi_pinterest">
 		<img%1$ssrc="%2$s.%3$s"%4$s>

@@ -55,4 +55,9 @@ function xcp_optin_save( $post_id ) {
 =================
 */
 
+function pibfi_replace_chars( $replace ) {
+	$dontallow = array( "&#038;" );
+	$onlyallow = array( "and" );
+	return str_replace( $dontallow, $onlyallow, $replace );
+}
 ?>
