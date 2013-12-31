@@ -325,7 +325,7 @@ function pibfi_engine_menu() {
 
 //Show the config page for the plugin in dashboard
 if ( is_admin() ) {
-	pibifi_check_content_width();
+	//pibifi_check_content_width();
 	wp_enqueue_style( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css' );
 	if ( 'on' == get_option( 'ppibfi_opt_enable' ) ) add_action( 'add_meta_boxes', 'xcp_optin' ); //ppibfi_meta.php
 
@@ -359,7 +359,6 @@ function xc_pin_install() {
 	if( false === get_option( 'ppibfi_img_button' ) ) update_option( 'ppibfi_img_button', array( 'file' => XCPIN_PATH.'ppibfi_button.png', 'width' => 80, 'height' => 50 ) );
 	$dont_show_buttons_on = array( "wp-smiley", "nopin" ); //Default classes to *ignore* the button
 	if( false === get_option( 'pibfi_no_show_button' ) ) update_option( 'pibfi_no_show_button', $dont_show_buttons_on );
-	pibfi_CheckImagesWidth();
 }
 
 // Run hook:
