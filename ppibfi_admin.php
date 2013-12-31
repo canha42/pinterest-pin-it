@@ -21,15 +21,15 @@ function pibfi_engine_configs() {
 		update_option( 'ppibfi_img_pinthis', htmlspecialchars( strip_tags( $_POST['ppibfi_img_pinthis'] ) ) );
 		update_option( 'ppibfi_opt_enable', htmlspecialchars( strip_tags( $_POST['ppibfi_opt_enable'] ) ) );
 		update_option( 'ppibfi_content_width', (int) $_POST['ppibfi_content_width'] );
-		$exclude_posts = array_filter(array_map('htmlspecialchars', explode(',', strip_tags($_POST['ppibfi_exclude']))));
+		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
-		update_option('pibfi_NoShowButton', $exclude_posts);
+		update_option( 'pibfi_NoShowButton', $exclude_posts );
 		
 		if( filter_var( $_POST['ppibfi_chosen_image'], FILTER_VALIDATE_URL ) ) {
 			$img_path = parse_url( $_POST['ppibfi_chosen_image'], PHP_URL_PATH );
 			$img_full_path = get_home_path().$img_path;
-			if(file_exists($img_full_path)) {
-				$img_size = getimagesize($img_full_path);
+			if( file_exists( $img_full_path ) ) {
+				$img_size = getimagesize( $img_full_path );
 				update_option( 'ppibfi_img_button', array( 'file' => $img_path, 'width' => $img_size[0], 'height' => $img_size[1] ) );
 			}
 		}
