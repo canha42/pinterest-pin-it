@@ -291,21 +291,31 @@ echo '<style type="text/css">
 }
 
 /*	-----------------
+/*	-----------------------
 		INTERACTIONS / FX
 		-----------------
+	-----------------------
 */
 
 .pibfi_pinterest .xc_pin,
 .pibfi_pinterest img {
 	-webkit-transition:opacity .2s ease-out; -moz-transition:opacity .2s ease-out; transition:opacity .2s ease-out;
+.pibfi_pinterest:hover img {
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
+	opacity: .7;
 }
 .pibfi_pinterest img:hover + .xc_pin,
 .pibfi_pinterest_hover {
 	opacity: .7;
+.pibfi_pinterest_hover, .pibfi_pinterest .xc_pin:hover {
+	opacity: 1;
 }
 .pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
 }</style>';
+}
 
 }
 
