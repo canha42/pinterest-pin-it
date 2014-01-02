@@ -111,6 +111,8 @@ function pibfi_engine_normalize_image_paths( $content ){
 /* This function adds the pin at each post's image */
 function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ) {
 	$post_title = pibfi_replace_chars( $post_title );
+function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description ) {
+	$description = pibfi_replace_chars( $description );
 	$replacement = '
 		<span class="pibfi_pinterest">
 		<img%1$ssrc="%2$s.%3$s"%4$s>
@@ -121,6 +123,7 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_t
 			</span>
 		</span>';
 
+			'&amp;media=%2$s.%3$s'.'&amp;description='.$description.'\')">
 	// Regular expression that finds all post's images
 	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
 
