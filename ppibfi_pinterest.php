@@ -4,7 +4,7 @@ UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY
 
 
 Plugin Name: Pinterest Pin It Button For Images
-Plugin URI: http://www.canha.net
+Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
 Description: Displays a Pin It button directly over your images.
 Author: Canha
 Author URI: http://www.canha.net
@@ -41,6 +41,8 @@ include( "ppibfi_meta.php" );  //Custom meta boxes for Posts and Pages
 	* Every one who has been reporting bugs.
 
 	* Super special thanks: to YOU, for donating *wink, wink*
+	
+	If you break, you pay! Just kidding, but be aware that I don't offer support for this plugin if anything gets changed. This is distributed as-is. Thank you for your comprehension!
 */
 
 
@@ -109,21 +111,21 @@ function pibfi_engine_normalize_image_paths( $content ){
 }
 
 /* This function adds the pin at each post's image */
-function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title ) {
-	$post_title = pibfi_replace_chars( $post_title );
 function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description ) {
 	$description = pibfi_replace_chars( $description );
+	/*
 	$replacement = '
 		<span class="pibfi_pinterest">
 		<img%1$ssrc="%2$s.%3$s"%4$s>
 			<span class="xc_pin" onclick="pin_this(event, \''.
 			$pinterest_base_url.
 			'?url='.esc_url( $post_url ).
-			'&amp;media=%2$s.%3$s'.'&amp;description='.$post_title.'\')">
-			</span>
-		</span>';
-
 			'&amp;media=%2$s.%3$s'.'&amp;description='.$description.'\')">
+			</span>
+		</span>';	
+		*/	
+	
+	
 	// Regular expression that finds all post's images
 	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
 
@@ -167,7 +169,7 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $descri
 		// If the post has any image with the (pibfi_ShowButton) class, the pin'll be showed in just these images
 		if( $any_image_has_the_needed_pin_class ){
 			if( $image[ 'pinthis' ] ){
-				$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
+				$image_tag = pibfi_generate_tag($image[1], $image[2], $image[3], $image[4], $pinterest_base_url, $post_url, $description);
 				$content = str_replace( $image['tag'], $image_tag, $content );
 			}
 		} else { // Check if the image should or shoudn't have the pin
@@ -180,13 +182,47 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $descri
 			if( ! empty( $forbidden_classes ) ) {
 				// If image has not forbidden class AND image has one of default WP inserted media tag, add pin-it button
 				if( ! pibfi_engine_img_tag_has_class( $image['tag'], $forbidden_classes ) and pibfi_engine_img_tag_is_wp_inserted( $image['tag'] ) ) {
-					$image_tag = sprintf( $replacement, $image[1], $image[2], $image[3], $image[4] );
+				/* Throw this into a function maybe, so it will also run with the "pinthis" class */
+				$image_tag = pibfi_generate_tag($image[1], $image[2], $image[3], $image[4], $pinterest_base_url, $post_url, $description);					
 					$content = str_replace( $image['tag'], $image_tag, $content );
 				}
 			}
 		}
 	}
 	return $content;
+
+}
+
+//This will generate the image code with all classes and info
+function pibfi_generate_tag( $image1, $image2, $image3, $image4, $pinterest_base_url, $post_url, $description ) {
+	$replacement = '
+		<span class="pibfi_pinterest %5$s">
+		<img%1$ssrc="%2$s.%3$s"%4$s>
+			<span class="xc_pin" onclick="pin_this(event, \''.
+			$pinterest_base_url.
+			'?url='.esc_url( $post_url ).
+			'&amp;media=%2$s.%3$s'.'&amp;description='.$description.'\')">
+			</span>
+		</span>
+	';
+	$float_left = "pibfi_float_left";
+	$float_right = "pibfi_float_right";
+	$float_none = "";
+	$float_center = "pibfi_float_center";
+	
+	if ( strpos( $image4,'alignright' ) !== false ) : $image_tag = sprintf( $replacement, $image1, $image2, $image3, $image4, $float_right );
+					
+	elseif ( strpos( $image4,'alignleft') !== false ) : $image_tag = sprintf( $replacement, $image1, $image2, $image3, $image4, $float_left );
+	
+	elseif ( strpos( $image4,'alignnone' ) !== false ) : $image_tag = sprintf( $replacement, $image1, $image2, $image3, $image4, $float_none );
+					
+	elseif ( strpos( $image4,'aligncenter' ) !== false ) : $image_tag = sprintf( $replacement, $image1, $image2, $image3, $image4, $float_center );
+					
+	else : $image_tag = sprintf( $replacement, $image1, $image2, $image3, $image4, $float_none );	
+	endif;
+	
+	return $image_tag;
+
 }
 
 /* This function checks if the image tag $tag has class $class. $class could be an array as well  */
@@ -270,10 +306,38 @@ echo '<style type="text/css">
 		-----------
 */
 
+
 .pibfi_pinterest {
 	position: relative;
+	display: inline-block;
+}
+
+.pibfi_float_left {
+	float:left;
+}
+.pibfi_float_right {
+	float:right;
+}
+
+.pibfi_float_center {
+	float: none;
+	margin: auto;
 	display: block;
 }
+
+.pibfi_float_left .xc_pin {
+	left:10px;
+}
+
+.pibfi_float_right .xc_pin {
+	right:10px;
+}
+
+.pibfi_float_center .xc_pin {
+	left:40%
+}
+
+
 .pibfi_pinterest .xc_pin {
 	/* Width and height of "Pin It" image button */
 	width: '.$ppibfi_img_button['width'].'px; height: '.$ppibfi_img_button['height'].'px;
@@ -281,25 +345,19 @@ echo '<style type="text/css">
 	background-image: url("'.$ppibfi_img_button['file'].'"); background-repeat: none;
 	position: absolute;
 	top: 5px;
-	margin-left: -1px;
 	opacity: 0;
 	cursor: pointer;
 	display: none;
 }
-.pibfi_pinterest img.left + .xc_pin {
-	margin-left: 0;
-}
 
-/*	-----------------
+
+.pibfi_pinterest:hover .xc_pin {display:block}
+
 /*	-----------------------
 		INTERACTIONS / FX
-		-----------------
 	-----------------------
 */
 
-.pibfi_pinterest .xc_pin,
-.pibfi_pinterest img {
-	-webkit-transition:opacity .2s ease-out; -moz-transition:opacity .2s ease-out; transition:opacity .2s ease-out;
 .pibfi_pinterest:hover img {
 	-webkit-transition:opacity .7s ease-out; -
 	moz-transition:opacity .7s ease-out; 
@@ -307,15 +365,16 @@ echo '<style type="text/css">
 	opacity: .7;
 }
 .pibfi_pinterest img:hover + .xc_pin,
-.pibfi_pinterest_hover {
-	opacity: .7;
 .pibfi_pinterest_hover, .pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
 }
 .pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
-}</style>';
 }
+
+</style>
+
+';
 
 }
 
