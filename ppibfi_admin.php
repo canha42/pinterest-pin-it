@@ -20,7 +20,6 @@ function pibfi_engine_configs() {
 		update_option( 'ppibfi_pg_cat', htmlspecialchars( strip_tags( $_POST['ppibfi_pg_cat'] ) ) );
 		update_option( 'ppibfi_img_pinthis', htmlspecialchars( strip_tags( $_POST['ppibfi_img_pinthis'] ) ) );
 		update_option( 'ppibfi_opt_enable', htmlspecialchars( strip_tags( $_POST['ppibfi_opt_enable'] ) ) );
-		update_option( 'ppibfi_content_width', (int) $_POST['ppibfi_content_width'] );
 		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
 		update_option( 'pibfi_no_show_button', $exclude_posts );
@@ -42,7 +41,6 @@ function pibfi_engine_configs() {
 	$xcp_img = ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) ? 'checked' : '';
 	$xcp_cat = ( 'on' == get_option( 'ppibfi_pg_cat' ) ) ? 'checked' : '';
 	$xcp_opt_enable = ( 'on' == get_option( 'ppibfi_opt_enable' ) ) ? 'checked' : '';
-	$ppibfi_content_width = get_option( 'ppibfi_content_width' );
 	$ppibfi_exclude = get_option( 'pibfi_no_show_button' );
 ?>
 <script type="text/javascript">checked=false;
@@ -53,14 +51,6 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 		<div class="xcpinc">
 		<p><?=__( 'Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you).', 'ppibfi_translate' ); ?></p>
 		<form method="post" action="#" id="frm1">
-
-		<fieldset>
-			<legend><?=__( 'Content width', 'ppibfi_translate' ); ?>:</legend>
-			<p><?=__( 'The plugin needs to know the width of the content area in pixels to place the button (only numbers).', 'ppibfi_translate' ); ?> </p>
-			<p>
-			<input type="number" name="ppibfi_content_width" id="ppibfi_content_width" value="<?php echo $ppibfi_content_width ?>" />
-			</p>
-		</fieldset>
 
 		<fieldset id="pinpages">
 			<legend><?=__( 'Show "Pin It" button on following pages:', 'ppibfi_translate' ); ?> </legend>
