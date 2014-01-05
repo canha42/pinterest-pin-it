@@ -1,12 +1,10 @@
-UNSTABLE COPY.
-
 === Pinterest Pin It Button For Images ===
 Contributors: canha, pererinha, vhf
 Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
-Tested up to: 3.4.1
-Stable tag: 1.1-nightly
+Tested up to: 3.8
+Stable tag: 1.1
 License: GPLv2 or later
 
 Add a "Pin It" button over your images, so users can add it to Pinterest easily.
@@ -17,7 +15,11 @@ Don't like the "Pin It" button underneath your post? Want to be able to add imag
 
 Have the user just hover the mouse over the image they want to pin and watch your visits grow!
 
-The description goes automatically as the name of the post, and so does the link of the post.
+*Long awaited version 1.1 with new features and better engine!
+I'm finally announcing version 1.1 with brand new features, a new front-end and a better engine. 
+
+
+
 
 Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
@@ -64,13 +66,19 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 
 = 1.1 =
 * Unreased yet
-* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin�!)
+* Feature: New engine running - no longer JavaScript / JQuery will be needed to show the pin-it button.
+* Feature: Annoying "Image is thought to be 1024 pixels" message removed
+* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin!)
 * Feature: Upload your own "Pin It" button
 * Feature: Uninstalls properly, removing options and cleaning stuff after removal
 * Bugfix: Now works with `short_open_tag` disabled
 * Bugfix: Now option fields are sanitized
 * Bugfix: Exclude- and opt-in- classes now correctly detected
 * Bugfix: Button won't show on non-WP-inserted images (i.e. other social media icons, "buy this" buttons, etc.) anymore
+* Bugfix: Post title / descriptions with ? and & would break Pinterests' description
+* Bugfix: <?php is now being used instead of <?
+ 
+
 
 = 1.0.1 =
 * Released 2012-8-15
