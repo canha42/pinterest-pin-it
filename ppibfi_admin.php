@@ -119,25 +119,60 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 
 		</form>
 	</div><!-- /xcpf (advanced) -->
-	<div class="xcpf">
+	<br style="clear:both" />
+	<div class="xcpf_help">
 		<h3><?=__( 'Care to help?', 'ppibfi_translate' ); ?> </h3>
-		<p><?=__( 'This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! Link to PayPal below.', 'ppibfi_translate' ); ?> </p>
-		<p><?=__( 'If you are a programmer willing to help out with the development, please drop me a line at canha (at) design.blog.br. But if you don\'t have any "mad skillz", you can also help by reporting bugs at <a href="https://github.com/canha42/pinterest-pin-it/issues">GitHub</a>. Please help spread the word about this plugin!', 'ppibfi_translate' ); ?> </p>
+		<p><?=__( 'This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! If you can\'t spare anything, consider helping spread the word about this awesome plugin via Twitter and Facebook.', 'ppibfi_translate' ); ?> </p>
 		<p><?=__( 'Thanks!', 'ppibfi_translate' ); ?> </p>
-		<div class="xcp_redes"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/pinterest-pin-it-button-for-images/" data-text="I'm using &quot;Pinterest Pin It Button For Images&quot; WP plugin on my site!" data-size="large" data-hashtags="pibfi">Tweet</a>
+		<div class="xcp_redes"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wordpress.org/extend/plugins/pinterest-pin-it-button-for-images/" data-text="I'm using &quot;Pinterest Pin It Button For Images&quot; WP plugin on my site!" data-count="vertical" data-hashtags="pibfi">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
-		<div class="xcp_redes"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwordpress.org%2Fextend%2Fplugins%2Fpinterest-pin-it-button-for-images%2F&amp;send=false&amp;layout=box_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=127437144025252" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:90px;" allowTransparency="true"></iframe></div>
+		<div class="xcp_redes"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwordpress.org%2Fextend%2Fplugins%2Fpinterest-pin-it-button-for-images%2F&amp;send=false&amp;layout=box_count&amp;width=60&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=127437144025252" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:90px;" allowTransparency="true"></iframe></div>
 		<div class="xcp_redes">
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="hosted_button_id" value="REQ63YWT5L46Q">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 
 
+
 		</div><!-- xcp_redes -->
+		<div class="xcp_redes">
+		<script src="http://coinwidget.com/widget/coin.js"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "1Pt3RzyygFUsnJhUbzewEB7eMRTijRQgm4"
+	, currency: "bitcoin"
+	, counter: "ammount"
+	, alignment: "bl"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Bitcoin"
+	, lbl_address: "Donate w/ Bitcoin. My address:"
+	, lbl_count: "donations"
+	, lbl_amount: "BTC"
+});
+</script>
+		</div>
+		
+		<div class="xcp_redes">
+		<script src="http://coinwidget.com/widget/coin.js"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "LTu15xN4rnKYnmfrmsCZLRBnp3mzLZJToa"
+	, currency: "litecoin"
+	, counter: "ammount"
+	, alignment: "ar"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Litecoin"
+	, lbl_address: "Donate w/ Litecoin. My address:"
+	, lbl_count: "donations"
+	, lbl_amount: "LTC"
+});
+</script>
+		</div>
 		<br style="clear:both" />
 
 	</div><!-- xcpf -->

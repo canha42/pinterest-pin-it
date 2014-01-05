@@ -398,7 +398,7 @@ function pibfi_engine_menu() {
 
 //Show the config page for the plugin in dashboard
 if ( is_admin() ) {
-	wp_enqueue_style( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css' );
+	//wp_enqueue_style( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_config.css' );
 	if ( 'on' == get_option( 'ppibfi_opt_enable' ) ) add_action( 'add_meta_boxes', 'xcp_optin' ); //ppibfi_meta.php
 
 }
