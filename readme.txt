@@ -7,7 +7,7 @@ Tested up to: 3.8
 Stable tag: 1.1
 License: GPLv2 or later
 
-Add a "Pin It" button over your images, so users can add it to Pinterest easily.
+Add a "Pin It" button over your images, so users can add it to Pinterest easily. !! UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY !!
 
 == Description ==
 
@@ -17,9 +17,6 @@ Have the user just hover the mouse over the image they want to pin and watch you
 
 *Long awaited version 1.1 with new features and better engine!
 I'm finally announcing version 1.1 with brand new features, a new front-end and a better engine. 
-
-
-
 
 Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
@@ -56,6 +53,9 @@ Yes. In the plugin settings window, select the "Enable opt-out" box and save. In
 = Where do I report bugs? =
 In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at https://github.com/canha42/pinterest-pin-it/issues (requires registry). 
 
+= Can I e-mail you with my problems? =
+I enjoy writting this plugin and maintaining it, but it's not something I can afford on a daily basis. Please take into account I have a day job and helping people individually is not possible. Please use the forum listed above to post your problem so even other people can help you. Thanks for your comprehension! :)
+
 == Screenshots ==
 
 1. Button that shows on image hover
@@ -69,7 +69,9 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Feature: New engine running - no longer JavaScript / JQuery will be needed to show the pin-it button.
 * Feature: Annoying "Image is thought to be 1024 pixels" message removed
 * Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin!)
-* Feature: Upload your own "Pin It" button
+* Feature: Opt-out single pages
+* Feature: Select what classes of images won't have a button
+* Feature: Show button only on images with class="pinthis"
 * Feature: Uninstalls properly, removing options and cleaning stuff after removal
 * Bugfix: Now works with `short_open_tag` disabled
 * Bugfix: Now option fields are sanitized
@@ -77,7 +79,7 @@ In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-but
 * Bugfix: Button won't show on non-WP-inserted images (i.e. other social media icons, "buy this" buttons, etc.) anymore
 * Bugfix: Post title / descriptions with ? and & would break Pinterests' description
 * Bugfix: <?php is now being used instead of <?
- 
+* Bugfix: Now working with Lazy Load plugin.
 
 
 = 1.0.1 =
