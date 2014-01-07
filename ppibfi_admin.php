@@ -8,9 +8,9 @@
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_admin.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
 
 add_action( 'admin_init', 'ppibfi_load_langs' );
-add_action( 'admin_enqueue_scripts', 'ppibfi_enqueue_scripts' );
-add_action( 'admin_print_scripts', 'ppibfi_media_script' );
-add_action( 'admin_init', 'ppibfi_replace_thickbox' );
+//add_action( 'admin_enqueue_scripts', 'ppibfi_enqueue_scripts' );
+//add_action( 'admin_print_scripts', 'ppibfi_media_script' );
+//add_action( 'admin_init', 'ppibfi_replace_thickbox' );
 
 function pibfi_engine_configs() {
 	if ( ! empty( $_POST['submit'] ) && check_admin_referer( 'ppibfi_update_option','ppibfi_post_option' ) ) {
@@ -24,6 +24,7 @@ function pibfi_engine_configs() {
 		sort($exclude_posts);
 		update_option( 'pibfi_no_show_button', $exclude_posts );
 		
+		/*
 		if( filter_var( $_POST['ppibfi_chosen_image'], FILTER_VALIDATE_URL ) ) {
 			$img_path = parse_url( $_POST['ppibfi_chosen_image'], PHP_URL_PATH );
 			$img_full_path = get_home_path().$img_path;
@@ -32,6 +33,7 @@ function pibfi_engine_configs() {
 				update_option( 'ppibfi_img_button', array( 'file' => $img_path, 'width' => $img_size[0], 'height' => $img_size[1] ) );
 			}
 		}
+		*/
 		?><div class="updated"><p><strong><?=__( 'Options saved.', 'ppibfi_translate' ); ?></strong></p></div><?php
 	}
 
@@ -49,6 +51,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 
 		<h2><?=__( 'Pinterest Pin It Button For Images', 'ppibfi_translate' ); ?></h2>
 		<div class="xcpinc">
+		<h3><?=__( 'Settings', 'ppibfi_translate' ); ?> </h3>
 		<p><?=__( 'Here you may change some settings for your Pinterest PIBFI plugin, although it is not necessary (we already have the optimal settings done for you).', 'ppibfi_translate' ); ?></p>
 		<form method="post" action="#" id="frm1">
 
@@ -77,13 +80,15 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 		</fieldset>
 
 		<fieldset>
-			<legend><?=__( 'Opt-out on single pages:','ppibfi_translate' ); ?> </legend>
-			<p><?=__( 'Option to enable a checkbox on singles and pages that will let you choose if the plugin will be deactivated on that particular page', 'ppibfi_translate' ); ?> </p>
+			<legend><?=__( 'Enable opt-out:','ppibfi_translate' ); ?> </legend>
+			<p><?=__( 'Option to enable a checkbox on posts and pages that will let you choose if the plugin will be deactivated on that particular page', 'ppibfi_translate' ); ?> </p>
 			<p>
 			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?php echo $xcp_opt_enable?> />
 			<label for="ppibfi_opt_enable"><?=__( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
 			</p>
 		</fieldset>
+		<!-- Soon, I promise! -->
+		<!--
 		<fieldset>
 			<legend><?=__( 'Choose a button to replace the default one','ppibfi_translate' ); ?> </legend>
 			<p>
@@ -94,15 +99,20 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<a id="chosen_image_link" href="" target="_blank"><img id="chosen_image_display" src="" /></a>
 			</p>
 		</fieldset>
+		-->
 		<?php wp_nonce_field('ppibfi_update_option','ppibfi_post_option'); ?>
-		<input type="submit" name="submit" value="<?=__( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+		<span class="xcp_submitbkg">
+			<input type="submit" name="submit" value="<?=__( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+			<div class="xcp_c"></div>
+		</span>
+		<div class="xcp_c"></div>
 
 	</div><!-- xcpinc -->
 	<div class="xcpf">
 		<h3><?=__( 'Advanced', 'ppibfi_translate' ); ?> </h3>
 		<fieldset id="advanced">
 			<legend><?=__( 'Exclude classes:', 'ppibfi_translate' ); ?> </legend>
-			<p><?=__( 'Images with the following "class" attribute won\'t display the button (comma separated):', 'ppibfi_translate' ); ?> </p>
+			<p><?=__( 'Images with the following "class" attributes won\'t display the button (comma separated):', 'ppibfi_translate' ); ?> </p>
 			<input type="text" name="ppibfi_exclude" id="ppibfi_exclude" value="<?php foreach ( $ppibfi_exclude as &$value)  echo $value.','; ?>" />
 		</fieldset>
 
@@ -110,16 +120,20 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<legend><?=__( 'Selected images only:', 'ppibfi_translate' ); ?> </legend>
 			<p>
 			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
-			<label for="ppibfi_img_pinthis"><?=__( 'Show "Pin it" button only on images with "pinthis" class', 'ppibfi_translate' ); ?> </label>
+			<label for="ppibfi_img_pinthis"><?=__( 'Show "Pin it" button only on images with class="pinthis"', 'ppibfi_translate' ); ?> </label>
 			</p>
-			<p><?=__( 'This option will overide the "Exclude classes" and "Enable opt-out" options.', 'ppibfi_translate' ); ?> </p>
+			<p><em><?=__( 'This option will overide the "Exclude classes" and "Enable opt-out" options.', 'ppibfi_translate' ); ?></em></p>
 		</fieldset>
 
-		<input type="submit" name="submit" value="<?=__( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+		<span class="xcp_submitbkg">
+			<input type="submit" name="submit" value="<?=__( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
+			<div class="xcp_c"></div>
+		</span>
 
 		</form>
+		<div class="xcp_c"></div>
 	</div><!-- /xcpf (advanced) -->
-	<br style="clear:both" />
+	
 	<div class="xcpf_help">
 		<h3><?=__( 'Care to help?', 'ppibfi_translate' ); ?> </h3>
 		<p><?=__( 'This plugin takes up a *lot* of my spare time and has cost me around US$ 500 in development out of my own pocket. Any donation amount (like five bucks) will be well appreciated as it\'ll give me more reason to work hard on new updates. Please consider donating! If you can\'t spare anything, consider helping spread the word about this awesome plugin via Twitter and Facebook.', 'ppibfi_translate' ); ?> </p>
@@ -173,8 +187,8 @@ CoinWidgetCom.go({
 });
 </script>
 		</div>
-		<br style="clear:both" />
-
+		<div class="xcp_c"></div>
+		<p><?=__( 'This plugin was developed by Sean "Canha" Berg @ <a href="http://canha.net" title="WordPress themes and plugins">canha.net</a>', 'ppibfi_translate' ); ?> </p>
 	</div><!-- xcpf -->
 
 	</div><!-- wrap -->
