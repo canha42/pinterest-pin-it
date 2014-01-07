@@ -1,11 +1,8 @@
 <?php
 /*
-UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY
-
-
 Plugin Name: Pinterest Pin It Button For Images
 Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
-Description: Displays a Pin It button directly over your images.
+Description: !! UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY !!
 Author: Canha
 Author URI: http://www.canha.net
 Version: 1.1-nightly
@@ -345,7 +342,7 @@ echo '<style type="text/css">
 	background-image: url("'.$ppibfi_img_button['file'].'"); background-repeat: none;
 	position: absolute;
 	top: 5px;
-	opacity: 0;
+	opacity: 0.7;
 	cursor: pointer;
 	display: none;
 }
@@ -365,11 +362,14 @@ echo '<style type="text/css">
 	opacity: .7;
 }
 .pibfi_pinterest img:hover + .xc_pin,
-.pibfi_pinterest_hover, .pibfi_pinterest .xc_pin:hover {
-	opacity: 1;
+.pibfi_pinterest_hover {
+	opacity: 0.7;
 }
 .pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
 }
 
 </style>
@@ -410,7 +410,7 @@ add_action( 'admin_menu', 'pibfi_engine_menu' );
 //Only run the script on the blog (i.e. not dashboard) and if the user is *not* accessing via mobile
 if ( ! is_admin() && ! stripos( $_SERVER['HTTP_USER_AGENT'], 'mobile' ) ) {
 	wp_enqueue_script( 'pibfi_pinterest', XCPIN_PATH.'ppibfi_pinterest.js', array( 'jquery' ) );
-	add_filter( 'the_content', 'pibfi_engine', 98 ); // The engine
+	add_filter( 'the_content', 'pibfi_engine', 98 ); // The engine, loads after Lazy Load
 	add_action( 'wp_head', 'cWGlobal' ); // Add function to wp_head();
 	add_action( 'wp_head', 'ppibfi_css' ); // Add CSS to wp_head();
 }
