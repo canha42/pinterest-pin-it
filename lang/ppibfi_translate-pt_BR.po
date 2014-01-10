@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pin It Button For Images\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-10 11:38-0300\n"
+"PO-Revision-Date: 2014-01-10 11:58-0300\n"
+"Last-Translator: Canha <canha@xcakeblogs.com.br>\n"
+"Language-Team: Canha.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Language: pt_BR\n"
+"X-Poedit-SearchPath-0: \n"
+
+#: ../ppibfi_admin.php:24
+msgid "Options saved."
+msgstr "Opções salvas."
+
+#: ../ppibfi_admin.php:39 ../ppibfi_pinterest.php:311
+msgid "Pinterest Pin It Button For Images"
+msgstr "Pinterest Pin It Button For Images"
+
+#: ../ppibfi_admin.php:41
+msgid "Settings"
+msgstr "Configurações"
+
+#: ../ppibfi_admin.php:42
+msgid ""
+"Here you may change some settings for your Pinterest PIBFI plugin, although "
+"it is not necessary (we already have the optimal settings done for you)."
+msgstr ""
+"Embora não seja necessário (nós já configuramos as opções ideais pra você), "
+"aqui você pode alterar algumas configurações do seu plugin Pinterest PIBFI."
+
+#: ../ppibfi_admin.php:46
+msgid "Show \"Pin It\" button on following pages:"
+msgstr "Mostrar botão \"Pin It\" nas seguintes páginas:"
+
+#: ../ppibfi_admin.php:49
+msgid "All pages"
+msgstr "Todas as páginas"
+
+#: ../ppibfi_admin.php:53
+msgid "Index / home"
+msgstr "Inicial / home"
+
+#: ../ppibfi_admin.php:57
+msgid "Single post"
+msgstr "Post (single)"
+
+#: ../ppibfi_admin.php:61
+msgid "Category page"
+msgstr "Categoria (category)"
+
+#: ../ppibfi_admin.php:65
+msgid "Page"
+msgstr "Página (page)"
+
+#: ../ppibfi_admin.php:70
+msgid "Default description:"
+msgstr "Descrição padrão:"
+
+#: ../ppibfi_admin.php:71
+msgid "Select what will be sent as image description on pinned image"
+msgstr "Selecione o que será mostrado no campo de descrição no Pinterest"
+
+#: ../ppibfi_admin.php:74
+msgid "Post title"
+msgstr "Título do post"
+
+#: ../ppibfi_admin.php:75
+msgid "Post title | post link"
+msgstr "Título do post | link do post"
+
+#: ../ppibfi_admin.php:76
+msgid "Post link"
+msgstr "Link do post"
+
+#: ../ppibfi_admin.php:77
+msgid "Website name"
+msgstr "Nome do site"
+
+#: ../ppibfi_admin.php:78
+msgid "Website name | website link"
+msgstr "Nome do site | Link do site"
+
+#: ../ppibfi_admin.php:79
+msgid "Website name | post name | post link"
+msgstr "Nome do site | nome do post | link do post"
+
+#: ../ppibfi_admin.php:87 ../ppibfi_admin.php:111
+msgid "Save"
+msgstr "Salvar"
+
+#: ../ppibfi_admin.php:94
+msgid "Advanced"
+msgstr "Avançado"
+
+#: ../ppibfi_admin.php:96
+msgid "Exclude classes:"
+msgstr "Excluir classes:"
+
+#: ../ppibfi_admin.php:97
+msgid ""
+"Images with the following \"class\" attributes won't display the button "
+"(comma separated):"
+msgstr ""
+"Imagens com os seguintes atributos de \"class\" não mostrarão o botão "
+"(separe com vírgula):"
+
+#: ../ppibfi_admin.php:102
+msgid "Selected images only:"
+msgstr "Imagens específicas apenas:"
+
+#: ../ppibfi_admin.php:105
+msgid "Show \"Pin it\" button only on images with class=\"pinthis\""
+msgstr "Mostrar botão apenas em imagens com class=\"pinthis\""
+
+#: ../ppibfi_admin.php:107
+msgid "This option will overide the \"Exclude classes\" option."
+msgstr "Essa opção irá sobrescrever a opção de \"Excluir classes\"."
+
+#: ../ppibfi_admin.php:120
+msgid "Care to help?"
+msgstr "Quer ajudar?"
+
+#: ../ppibfi_admin.php:121
+msgid ""
+"This plugin takes up a *lot* of my spare time and has cost me around US$ 500 "
+"in development out of my own pocket. Any donation amount (like five bucks) "
+"will be well appreciated as it'll give me more reason to work hard on new "
+"updates. Please consider donating! If you can't spare anything, consider "
+"helping spread the word about this awesome plugin via Twitter and Facebook."
+msgstr ""
+"Esse plugin consome muito do meu tempo livre e me custou mais de US$ 500 "
+"tirados do meu próprio bolso. Qualquer quantia de doação (como cincão) será "
+"recebido com alegria e me dará mais ânimo para trabalhar em novas "
+"atualizações. Por favor, considere uma doação! Se você não puder ajudar, "
+"considere ajudar compartilhando esse plugin pelo Twitter e Facebook."
+
+#: ../ppibfi_admin.php:122
+msgid "Thanks!"
+msgstr "Obrigado!"
+
+#: ../ppibfi_admin.php:173
+msgid ""
+"This plugin was developed by Sean \"Canha\" Berg @ <a href=\"http://canha.net"
+"\" title=\"WordPress themes and plugins\">canha.net</a>"
+msgstr ""
+"Plugin desenvolvido por Sean \"Canha\" Berg @ <a href=\"http://canha.net\" "
+"title=\"WordPress themes and plugins\">canha.net</a>"
+
+#: ../ppibfi_admin.php:222
+msgid "Insert into Post"
+msgstr "Inserir no post"
+
+#: ../ppibfi_admin.php:224
+msgid "Use this image"
+msgstr "Use esta imagem"
+
+#: ../ppibfi_meta.php:13
+msgid "Pinterest plugin"
+msgstr "Pinterest plugin"
+
+#: ../ppibfi_meta.php:33
+msgid "Disable Pinterest Pin It button on all images in this page"
+msgstr "Desabilitar botão do Pinterest em todas as imagens desta página"
+
+#: ../ppibfi_pinterest.php:312
+msgid "Pinterest Pin It"
+msgstr "Pinterest Pin It"

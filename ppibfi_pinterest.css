@@ -1,49 +1,111 @@
 /*
 Plugin Name: Pinterest Pin It Button For Images
-Plugin URI: http://www.canha.net
-Description: Displays a Pin It button directly over your images
+Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
 Author: Canha
 Author URI: http://www.canha.net
-Version: 1.0.2
-*/
-/*	-----------
-		BASE STYLES
-		-----------
+
+==========================================================================
+
+So, you want to change the "Pin It" button, eh? Well, here's the place to do it.
+
+In the style below, just change the "width" and "height" values for the values of your button, and add the full URL to the image as the "background-image" value. Please be advised that you *must* enter the full URL so the button shows properly.
+
+Example: your button is 150 pixels wide and 70 pixels high and is at http://example.com/button.png
+
+Change bellow to:
+	width: 150px; 
+	height: 70px;
+	background-image: url("http://example.com/button.png"); 
+	
+If you wish to change anything else, do so at your own risk. Unfortunatelly, I can't provide support for this as it would take too much time and it's not viable for a free plugin. And if you do need support, please consider the WordPress forums as I'm unlikely to answer e-mails regarding the subject:
+http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images
+
+I'm still working on an easier version, but this should do it for now. 
+
+The code is bellow:
 */
 
-/* If you feel comfortable editing here, go ahead. I promise to add a function soon to easily change the button */
-
-.pibfi_pinterest {
-	position: relative;
-	display: block;
-}
 .pibfi_pinterest .xc_pin {
-	width: 80px; height: 50px; /* Please note that the button is 80px x 50px. If you use a different size button, change this */
-	background-image: url('ppibfi_button.png'); background-repeat: none; /* This is the buttons image. Image can be found in the plugin folder */
+	/* Width and height of "Pin It" image button */
+	width: 80px; 
+	height: 50px;
+	/* Image button */
+	background-image: url("ppibfi_button.png"); 
+
+/* ==========================================================================
+	 Try not to change from here on down, unless you know what you're doing!
+   ========================================================================== */
+   
+	background-repeat: none;
 	position: absolute;
 	top: 5px;
-	margin-left: -1px;
-	opacity: 0;
+	opacity: 0.7;
 	cursor: pointer;
 	display: none;
 }
-.pibfi_pinterest img.left + .xc_pin {
-	margin-left: 0;
-}
 
-/*	-----------------
-		INTERACTIONS / FX
-		-----------------
+/* =====================
+	FOR ADVANCED USERS:
+   =====================
+
+Code is displayed as:
+<span class="pibfi_pinterest pibfi_float_X">
+	<img src="link_to_image.jpg" class="alignX" />
+	<span class="xc_pin"></span>
+</span>
+
+The script grabs the "alignX" (default WordPress alignment values) value from each image to identify where the button will be aligned to.
+	- "alignleft" will display as "pibfi_float_left"
+	- "alignright" will display as "pibfi_float_right"
+	- "aligncenter" will display as "pibfi_float_center"
+	- "alignnone" won't display any particular class (resorts to default)
 */
-
-.pibfi_pinterest .xc_pin,
-.pibfi_pinterest img {
-	-webkit-transition:opacity .2s ease-out; -moz-transition:opacity .2s ease-out; transition:opacity .2s ease-out;
+.pibfi_pinterest {
+	position: relative;
+	display: inline-block;
 }
+
+.pibfi_float_left {
+	float:left;
+}
+.pibfi_float_right {
+	float:right;
+}
+
+.pibfi_float_center {
+	float: none;
+	margin: auto;
+	display: block;
+}
+
+.pibfi_float_left .xc_pin {
+	left:10px;
+}
+
+.pibfi_float_right .xc_pin {
+	right:10px;
+}
+
+.pibfi_float_center .xc_pin {
+	left:40%
+}
+
+.pibfi_pinterest:hover .xc_pin {display:block}
+
+.pibfi_pinterest:hover img {
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
+	opacity: .7;
+}
+
 .pibfi_pinterest img:hover + .xc_pin,
 .pibfi_pinterest_hover {
-	opacity: .7;
+	opacity: 0.7;
 }
 .pibfi_pinterest .xc_pin:hover {
 	opacity: 1;
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
 }

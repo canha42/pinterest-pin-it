@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pin It Button For Images\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-10 11:38-0300\n"
+"PO-Revision-Date: 2014-01-10 11:38-0300\n"
+"Last-Translator: Canha <canha@xcakeblogs.com.br>\n"
+"Language-Team: canha\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../ppibfi_admin.php:24
+msgid "Options saved."
+msgstr ""
+
+#: ../ppibfi_admin.php:39 ../ppibfi_pinterest.php:311
+msgid "Pinterest Pin It Button For Images"
+msgstr ""
+
+#: ../ppibfi_admin.php:41
+msgid "Settings"
+msgstr ""
+
+#: ../ppibfi_admin.php:42
+msgid ""
+"Here you may change some settings for your Pinterest PIBFI plugin, although "
+"it is not necessary (we already have the optimal settings done for you)."
+msgstr ""
+
+#: ../ppibfi_admin.php:46
+msgid "Show \"Pin It\" button on following pages:"
+msgstr ""
+
+#: ../ppibfi_admin.php:49
+msgid "All pages"
+msgstr ""
+
+#: ../ppibfi_admin.php:53
+msgid "Index / home"
+msgstr ""
+
+#: ../ppibfi_admin.php:57
+msgid "Single post"
+msgstr ""
+
+#: ../ppibfi_admin.php:61
+msgid "Category page"
+msgstr ""
+
+#: ../ppibfi_admin.php:65
+msgid "Page"
+msgstr ""
+
+#: ../ppibfi_admin.php:70
+msgid "Default description:"
+msgstr ""
+
+#: ../ppibfi_admin.php:71
+msgid "Select what will be sent as image description on pinned image"
+msgstr ""
+
+#: ../ppibfi_admin.php:74
+msgid "Post title"
+msgstr ""
+
+#: ../ppibfi_admin.php:75
+msgid "Post title | post link"
+msgstr ""
+
+#: ../ppibfi_admin.php:76
+msgid "Post link"
+msgstr ""
+
+#: ../ppibfi_admin.php:77
+msgid "Website name"
+msgstr ""
+
+#: ../ppibfi_admin.php:78
+msgid "Website name | website link"
+msgstr ""
+
+#: ../ppibfi_admin.php:79
+msgid "Website name | post name | post link"
+msgstr ""
+
+#: ../ppibfi_admin.php:87 ../ppibfi_admin.php:111
+msgid "Save"
+msgstr ""
+
+#: ../ppibfi_admin.php:94
+msgid "Advanced"
+msgstr ""
+
+#: ../ppibfi_admin.php:96
+msgid "Exclude classes:"
+msgstr ""
+
+#: ../ppibfi_admin.php:97
+msgid ""
+"Images with the following \"class\" attributes won't display the button "
+"(comma separated):"
+msgstr ""
+
+#: ../ppibfi_admin.php:102
+msgid "Selected images only:"
+msgstr ""
+
+#: ../ppibfi_admin.php:105
+msgid "Show \"Pin it\" button only on images with class=\"pinthis\""
+msgstr ""
+
+#: ../ppibfi_admin.php:107
+msgid "This option will overide the \"Exclude classes\" option."
+msgstr ""
+
+#: ../ppibfi_admin.php:120
+msgid "Care to help?"
+msgstr ""
+
+#: ../ppibfi_admin.php:121
+msgid ""
+"This plugin takes up a *lot* of my spare time and has cost me around US$ 500 "
+"in development out of my own pocket. Any donation amount (like five bucks) "
+"will be well appreciated as it'll give me more reason to work hard on new "
+"updates. Please consider donating! If you can't spare anything, consider "
+"helping spread the word about this awesome plugin via Twitter and Facebook."
+msgstr ""
+
+#: ../ppibfi_admin.php:122
+msgid "Thanks!"
+msgstr ""
+
+#: ../ppibfi_admin.php:173
+msgid ""
+"This plugin was developed by Sean \"Canha\" Berg @ <a href=\"http://canha.net"
+"\" title=\"WordPress themes and plugins\">canha.net</a>"
+msgstr ""
+
+#: ../ppibfi_admin.php:222
+msgid "Insert into Post"
+msgstr ""
+
+#: ../ppibfi_admin.php:224
+msgid "Use this image"
+msgstr ""
+
+#: ../ppibfi_meta.php:13
+msgid "Pinterest plugin"
+msgstr ""
+
+#: ../ppibfi_meta.php:33
+msgid "Disable Pinterest Pin It button on all images in this page"
+msgstr ""
+
+#: ../ppibfi_pinterest.php:312
+msgid "Pinterest Pin It"
+msgstr ""
