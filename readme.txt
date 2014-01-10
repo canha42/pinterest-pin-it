@@ -4,28 +4,25 @@ Donate link: http://desgn.me/pinterest
 Tags: pinterest, pin-it, button, image, images, pinit, social media, hover, click, photo, photography, photographer
 Requires at least: 3.2.1
 Tested up to: 3.8
-Stable tag: 1.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 
-Add a "Pin It" button over your images, so users can add it to Pinterest easily. !! UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY !!
-
+Add a "Pin It" button over your images, so users can add it to Pinterest easily.
 == Description ==
 
 Don't like the "Pin It" button underneath your post? Want to be able to add images directly to Pinterest by just clicking on the image? Your problems are over!
 
 Have the user just hover the mouse over the image they want to pin and watch your visits grow!
 
-*Long awaited version 1.1 with new features and better engine!
-I'm finally announcing version 1.1 with brand new features, a new front-end and a better engine. 
+*Long awaited version 1.1 with new features and better engine!*
 
-Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
+I'm finally announcing version 1.1 with brand new features, a new front-end and a better engine. Just enable the plugin. The optimal configurations are set, but if you wish, we have a little panel under "Settings > Pinterest Pin It"
 	
-*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.
-*You can also help develop the plugin or just beta-test it. Check out the GitHub page: https://github.com/canha42/pinterest-pin-it
+*Found any bugs? Head on to https://github.com/canha42/pinterest-pin-it and report it, please.*
 
 Check out the new features in the Changelog.
 
-Please consider donating any spare change to help me work on this plugin more. Donations can be made at: http://desgn.me/pinterest
+Please consider donating any spare change to help me work on this plugin more. Donations can be made in the plugin settings page.
 
 (This is an unofficial plugin and is not related to or endorsed by Pinterest or it's affiliates)
 
@@ -42,13 +39,16 @@ Please consider donating any spare change to help me work on this plugin more. D
 After installed, go to your "Settings" menu and select "Pinterest Pin It". There, you'll have several settings you can change.
 
 = How do I add the button only to specific images? =
-On the plugin settings page, check the box under the "Advanced" section called "Show the 'Pin it' button only on images with 'pinthis' class". Head on to your post and edit it. If you are using HTML view: just add `class="pinthis"` to the image. If a "class" already exists, just add a space to the end of it and type `pinthis`. If you are using Visual view, click once on your image, select the "Edit image" button, click on the "Advanced settings" tab and add to the "CSS Class" field `pinthis`.
+On the plugin settings page, check the box under the "Advanced" section called "Selected images only". Head on to your post and edit it. If you are using HTML view: just add `class="pinthis"` to the image. If a "class" already exists, just add a space to the end of it and type `pinthis`. If you are using Visual view, click once on your image, select the "Edit image" button, click on the "Advanced settings" tab and add to the "CSS Class" field `pinthis`.
 
 = Images with specific classes shouldn't show the button. Can this be done? =
 Yes. In the plugin settings window, just type in the class you want to exclude from recieving the button. You can also use the default `nopin` class on your images.
 
 = Can I disable the button on all images of a post? =
-Yes. In the plugin settings window, select the "Enable opt-out" box and save. In your post editing, you will see a "Pinterest plugin" box to the right side of your window. There you can select "Disable Pinterest Pin it button on this page".
+Yes. In your post editing, you will see a "Pinterest plugin" box to the right side of your window. There you can select "Disable Pinterest Pin It button on all images in this page".
+
+= Can I add / change the "Pin This" button? =
+Yes. Just open the ppibfi_pinterest.css file. You'll find instructions there on how to change your button.
 
 = Where do I report bugs? =
 In the WordPress forum (http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images) or, even better (as I check it more often), our bug tracker at https://github.com/canha42/pinterest-pin-it/issues (requires registry). 
@@ -64,22 +64,26 @@ I enjoy writting this plugin and maintaining it, but it's not something I can af
 
 == Changelog ==
 
-= 1.1 =
-* Unreased yet
+= 1.1.0 =
+* Released 2013-1-10
 * Feature: New engine running - no longer JavaScript / JQuery will be needed to show the pin-it button.
 * Feature: Annoying "Image is thought to be 1024 pixels" message removed
-* Feature: Plugin translation (currently available : French. Soon : Brazilian Portuguese. Please help translating this plugin!)
-* Feature: Opt-out single pages
+* Feature: Plugin translation (currently available : Brazilian Portuguese. Please help translating this plugin!)
+* Feature: Opt-out option on single post and pages
 * Feature: Select what classes of images won't have a button
 * Feature: Show button only on images with class="pinthis"
 * Feature: Uninstalls properly, removing options and cleaning stuff after removal
+* Bugfix: CSS exported to a separate file (not anymore showing in the <head>)
 * Bugfix: Now works with `short_open_tag` disabled
 * Bugfix: Now option fields are sanitized
 * Bugfix: Exclude- and opt-in- classes now correctly detected
 * Bugfix: Button won't show on non-WP-inserted images (i.e. other social media icons, "buy this" buttons, etc.) anymore
 * Bugfix: Post title / descriptions with ? and & would break Pinterests' description
 * Bugfix: <?php is now being used instead of <?
-* Bugfix: Now working with Lazy Load plugin.
+* Bugfix: Now working with Lazy Load plugin
+* Bugfix: On image hover wouldn't change the button's opacity in some cases
+* Bugfix: HTML code in "Exclude classes" causing crashes
+* Bugfix: My coffee machine was broken
 
 
 = 1.0.1 =
@@ -127,4 +131,4 @@ I enjoy writting this plugin and maintaining it, but it's not something I can af
 * Open beta test
 
 == Upgrade Notice ==
-If you have made changes to the button, please make sure to back it up before updating.
+If you have made changes to the button, please make sure to back it up before updating. Update will most likely wipe any changes you've made to the plugin.

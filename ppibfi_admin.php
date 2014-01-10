@@ -8,9 +8,6 @@
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_admin.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
 
 add_action( 'admin_init', 'ppibfi_load_langs' );
-//add_action( 'admin_enqueue_scripts', 'ppibfi_enqueue_scripts' );
-//add_action( 'admin_print_scripts', 'ppibfi_media_script' );
-//add_action( 'admin_init', 'ppibfi_replace_thickbox' );
 
 function pibfi_engine_configs() {
 	if ( ! empty( $_POST['submit'] ) && check_admin_referer( 'ppibfi_update_option','ppibfi_post_option' ) ) {
@@ -23,17 +20,7 @@ function pibfi_engine_configs() {
 		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
 		update_option( 'pibfi_no_show_button', $exclude_posts );
-		
-		/*
-		if( filter_var( $_POST['ppibfi_chosen_image'], FILTER_VALIDATE_URL ) ) {
-			$img_path = parse_url( $_POST['ppibfi_chosen_image'], PHP_URL_PATH );
-			$img_full_path = get_home_path().$img_path;
-			if( file_exists( $img_full_path ) ) {
-				$img_size = getimagesize( $img_full_path );
-				update_option( 'ppibfi_img_button', array( 'file' => $img_path, 'width' => $img_size[0], 'height' => $img_size[1] ) );
-			}
-		}
-		*/
+
 		?><div class="updated"><p><strong><?=__( 'Options saved.', 'ppibfi_translate' ); ?></strong></p></div><?php
 	}
 
@@ -94,19 +81,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			
 			</p>
 		</fieldset>
-		<!-- Soon, I promise! -->
-		<!--
-		<fieldset>
-			<legend><?=__( 'Choose a button to replace the default one','ppibfi_translate' ); ?> </legend>
-			<p>
-			<input id="upload_image_button" value="<?=__( 'choose an image','ppibfi_translate' ); ?>" type="button" onclick="ppibfi_media_popup();" />
-			<input id="chosen_image" name="chosen_image" type="hidden" />
-			</p>
-			<p id="chosen_image_info" style="display:none"><strong><?=__( 'Chosen image', 'ppibfi_translate' ); ?></strong><br />
-			<a id="chosen_image_link" href="" target="_blank"><img id="chosen_image_display" src="" /></a>
-			</p>
-		</fieldset>
-		-->
+
 		<?php wp_nonce_field('ppibfi_update_option','ppibfi_post_option'); ?>
 		<span class="xcp_submitbkg">
 			<input type="submit" name="submit" value="<?=__( 'Save', 'ppibfi_translate' ); ?>" class="xcp_submit" />
@@ -129,7 +104,7 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<input type="checkbox" name="ppibfi_img_pinthis" id="ppibfi_img_pinthis" <?=$xcp_img?> />
 			<label for="ppibfi_img_pinthis"><?=__( 'Show "Pin it" button only on images with class="pinthis"', 'ppibfi_translate' ); ?> </label>
 			</p>
-			<p><em><?=__( 'This option will overide the "Exclude classes" and "Enable opt-out" options.', 'ppibfi_translate' ); ?></em></p>
+			<p><em><?=__( 'This option will overide the "Exclude classes" option.', 'ppibfi_translate' ); ?></em></p>
 		</fieldset>
 
 		<span class="xcp_submitbkg">

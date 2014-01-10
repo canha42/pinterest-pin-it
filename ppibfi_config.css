@@ -1,4 +1,5 @@
-.xcpinc, .xcpf, .xcpf_help  {border:1px solid #e5e5e5; padding:0 20px; background: #fff; width:45%; margin-top:20px;}
+/* Pinterest interface */
+.xcpinc, .xcpf, .xcpf_help {border:1px solid #e5e5e5; padding:0 20px; background: #fff; width:45%; margin-top:20px;}
 .xcpinc fieldset {border:1px solid #e5e5e5; padding:0 20px; margin:20px 0;}
 .xcp_submit {background:#1e8cbe; border-color:#005684; color:rgba(255,255,255,.95); -webkit-box-shadow:inset 0 1px 0 rgba(0,0,0,.1); box-shadow:inset 0 1px 0 rgba(0,0,0,.1); vertical-align:top; display:inline-block; text-decoration:none; font-size:13px; line-height:26px; height:28px; margin:0; padding:0 10px 1px; cursor:pointer; border-width:1px; border-style:solid; -webkit-border-radius:3px; -webkit-appearance:none; border-radius:3px; white-space:nowrap; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; width:100px;}
 .xcpinc {float: left;}

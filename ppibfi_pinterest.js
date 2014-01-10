@@ -4,7 +4,6 @@ Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
 Description: Displays a Pin It button directly over your images.
 Author: Canha
 Author URI: http://www.canha.net
-
 This function shows the pin-it dialogue
 */
 // By vhf

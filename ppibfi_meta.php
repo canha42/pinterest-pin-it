@@ -30,7 +30,7 @@ function xcp_optin_custombox( $post ) {
 	// The actual fields for data entry
 	echo '<label for="xc_optin_field_disable">';
 	echo '<input type="checkbox" name="xc_optin_field_disable" id="xc_optin_field_disable" value="on" '.$xc_check.' /> ';
-	_e('Disable Pinterest Pin It button on this page', 'ppibfi_translate' );
+	_e('Disable Pinterest Pin It button on all images in this page', 'ppibfi_translate' );
 }
 
 /*

@@ -2,16 +2,16 @@
 /*
 Plugin Name: Pinterest Pin It Button For Images
 Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
-Description: !! UNSTABLE COPY. FOR DEVELOPMENT PURPOSES ONLY !!
+Description: Displays a Pin It button directly over your images.
 Author: Canha
 Author URI: http://www.canha.net
-Version: 1.1-nightly
+Version: 1.1.0
 */
 
 //Plugin shouldn't be accessed directly
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'ppibfi_pinterest.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ( 'Stop! Hammer time!' );
 
-define( "XCPIN_VERSION", "1.1" );
+define( "XCPIN_VERSION", "1.1.0" );
 define( "XCPIN_PATH", WP_PLUGIN_URL . "/" . plugin_basename( dirname( __FILE__ ) ) . "/" );
 define( "XCPIN_NAME", "Pinterest Pin It Button For Images" );
 
@@ -39,7 +39,11 @@ include( "ppibfi_meta.php" );  //Custom meta boxes for Posts and Pages
 
 	* Super special thanks: to YOU, for donating *wink, wink*
 	
-	If you break, you pay! Just kidding, but be aware that I don't offer support for this plugin if anything gets changed. This is distributed as-is. Thank you for your comprehension!
+	If you break, you pay! Just kidding, but be aware that I don't offer support for this plugin if anything gets changed. This is distributed as-is.
+	
+	And if you do need support, please consider the forums as I'm unlikely to answer e-mails regarding plugin support:
+	http://wordpress.org/support/plugin/pinterest-pin-it-button-for-images
+	Thank you for your comprehension!
 */
 
 
@@ -139,18 +143,6 @@ function pibfi_engine_normalize_image_paths( $content ){
 /* This function adds the pin at each post's image */
 function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description ) {
 	$description = pibfi_replace_chars( $description );
-	/*
-	$replacement = '
-		<span class="pibfi_pinterest">
-		<img%1$ssrc="%2$s.%3$s"%4$s>
-			<span class="xc_pin" onclick="pin_this(event, \''.
-			$pinterest_base_url.
-			'?url='.esc_url( $post_url ).
-			'&amp;media=%2$s.%3$s'.'&amp;description='.$description.'\')">
-			</span>
-		</span>';	
-		*/	
-	
 	
 	// Regular expression that finds all post's images
 	$pattern = '/<img(.*?)src=[\'"](.*?).(bmp|gif|jpeg|jpg|png)[\'"](.*?)>/i';
@@ -216,7 +208,6 @@ function pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $descri
 		}
 	}
 	return $content;
-
 }
 
 //This will generate the image code with all classes and info
@@ -248,7 +239,6 @@ function pibfi_generate_tag( $image1, $image2, $image3, $image4, $pinterest_base
 	endif;
 	
 	return $image_tag;
-
 }
 
 /* This function checks if the image tag $tag has class $class. $class could be an array as well  */
