@@ -1,0 +1,110 @@
+/*
+Plugin Name: Pinterest Pin It Button For Images
+Plugin URI: http://wordpress.org/plugins/pinterest-pin-it-button-for-images/
+Author: Canha
+Author URI: http://www.canha.net
+
+==========================================================================
+
+So, you want to change the "Pin It" button, eh? Well, here's the place to do it.
+
+In the style below, just change the "width" and "height" values for the values of your button, and add the full URL to the image as the "background-image" value. Please be advised that you *must* enter the full URL so the button shows properly.
+
+Example: your button is 150 pixels wide and 70 pixels high and is at http://example.com/button.png
+
+Change bellow to:
+	width: 150px; 
+	height: 70px;
+	background-image: url("http://example.com/button.png"); 
+	
+If you wish to change anything else, do so at your own risk. Unfortunatelly, I can't provide support for this as it would take too much time and it's not viable for a free plugin.
+
+I'm still working on an easier version, but this should do it for now. 
+
+The code is bellow:
+*/
+
+.pibfi_pinterest .xc_pin {
+	/* Width and height of "Pin It" image button */
+	width: 80px; 
+	height: 50px;
+	/* Image button */
+	background-image: url("ppibfi_button.png"); 
+
+/* ==========================================================================
+	 Try not to change from here on down, unless you know what you're doing!
+   ========================================================================== */
+   
+	background-repeat: none;
+	position: absolute;
+	top: 5px;
+	opacity: 0.7;
+	cursor: pointer;
+	display: none;
+}
+
+/* =====================
+	FOR ADVANCED USERS:
+   =====================
+
+Code is displayed as:
+<span class="pibfi_pinterest pibfi_float_X">
+	<img src="link_to_image.jpg" class="alignX" />
+	<span class="xc_pin"></span>
+</span>
+
+The script grabs the "alignX" (default WordPress alignment values) value from each image to identify where the button will be aligned to.
+	- "alignleft" will display as "pibfi_float_left"
+	- "alignright" will display as "pibfi_float_right"
+	- "aligncenter" will display as "pibfi_float_center"
+	- "alignnone" won't display any particular class (resorts to default)
+*/
+.pibfi_pinterest {
+	position: relative;
+	display: inline-block;
+}
+
+.pibfi_float_left {
+	float:left;
+}
+.pibfi_float_right {
+	float:right;
+}
+
+.pibfi_float_center {
+	float: none;
+	margin: auto;
+	display: block;
+}
+
+.pibfi_float_left .xc_pin {
+	left:10px;
+}
+
+.pibfi_float_right .xc_pin {
+	right:10px;
+}
+
+.pibfi_float_center .xc_pin {
+	left:40%
+}
+
+.pibfi_pinterest:hover .xc_pin {display:block}
+
+.pibfi_pinterest:hover img {
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
+	opacity: .7;
+}
+
+.pibfi_pinterest img:hover + .xc_pin,
+.pibfi_pinterest_hover {
+	opacity: 0.7;
+}
+.pibfi_pinterest .xc_pin:hover {
+	opacity: 1;
+	-webkit-transition:opacity .7s ease-out; -
+	moz-transition:opacity .7s ease-out; 
+	transition:opacity .7s ease-out;
+}
