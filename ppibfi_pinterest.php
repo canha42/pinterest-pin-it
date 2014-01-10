@@ -475,7 +475,6 @@ register_activation_hook( __FILE__, 'xc_pin_install' );
 function pibfi_uninstall() {
 	if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 		exit ();
-
 		delete_option( 'ppibfi_pg_index');
 		delete_option( 'ppibfi_pg_single');
 		delete_option( 'ppibfi_pg_page');

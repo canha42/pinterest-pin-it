@@ -19,8 +19,6 @@ function pibfi_engine_configs() {
 		update_option( 'ppibfi_pg_page', htmlspecialchars( strip_tags( $_POST['ppibfi_pg_page'] ) ) );
 		update_option( 'ppibfi_pg_cat', htmlspecialchars( strip_tags( $_POST['ppibfi_pg_cat'] ) ) );
 		update_option( 'ppibfi_img_pinthis', htmlspecialchars( strip_tags( $_POST['ppibfi_img_pinthis'] ) ) );
-		update_option( 'ppibfi_opt_enable', htmlspecialchars( strip_tags( $_POST['ppibfi_opt_enable'] ) ) );
-		
 		update_option( 'ppibfi_description', htmlspecialchars( strip_tags( $_POST['ppibfi_description'] ) ) );
 		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
@@ -44,7 +42,6 @@ function pibfi_engine_configs() {
 	$xcp_page = ( 'on' == get_option( 'ppibfi_pg_page' ) ) ? 'checked' : '';
 	$xcp_img = ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) ? 'checked' : '';
 	$xcp_cat = ( 'on' == get_option( 'ppibfi_pg_cat' ) ) ? 'checked' : '';
-	$xcp_opt_enable = ( 'on' == get_option( 'ppibfi_opt_enable' ) ) ? 'checked' : '';
 	$ppibfi_exclude = get_option( 'pibfi_no_show_button' );
 	$ppibfi_description = get_option( 'ppibfi_description' );
 ?>
@@ -79,15 +76,6 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<p>
 			<input type="checkbox" name="ppibfi_pg_page" id="ppibfi_pg_page" <?php echo $xcp_page?> />
 			<label for="ppibfi_pg_page"><?=__( 'Page', 'ppibfi_translate' ); ?> </label>
-			</p>
-		</fieldset>
-
-		<fieldset>
-			<legend><?=__( 'Enable opt-out:','ppibfi_translate' ); ?> </legend>
-			<p><?=__( 'Option to enable a checkbox on posts and pages that will let you choose if the plugin will be deactivated on that particular page', 'ppibfi_translate' ); ?> </p>
-			<p>
-			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?php echo $xcp_opt_enable?> />
-			<label for="ppibfi_opt_enable"><?=__( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
 			</p>
 		</fieldset>
 		
