@@ -10,7 +10,7 @@ This function shows the pin-it dialogue
 // By vhf
 function pin_this(e, url) {
 	jQuery(window).ready(function(jQuery) {
-		window.open(url, 'pinterest', 'screenX=100,screenY=100,height=580,width=730');
+		window.open(url, 'pinterest', 'screenX=100,screenY=100,height=340,width=730');
 		e.preventDefault();
 		e.stopPropagation();
 	});
