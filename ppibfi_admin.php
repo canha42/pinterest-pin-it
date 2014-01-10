@@ -20,6 +20,8 @@ function pibfi_engine_configs() {
 		update_option( 'ppibfi_pg_cat', htmlspecialchars( strip_tags( $_POST['ppibfi_pg_cat'] ) ) );
 		update_option( 'ppibfi_img_pinthis', htmlspecialchars( strip_tags( $_POST['ppibfi_img_pinthis'] ) ) );
 		update_option( 'ppibfi_opt_enable', htmlspecialchars( strip_tags( $_POST['ppibfi_opt_enable'] ) ) );
+		
+		update_option( 'ppibfi_description', htmlspecialchars( strip_tags( $_POST['ppibfi_description'] ) ) );
 		$exclude_posts = array_filter( array_map ('htmlspecialchars', explode(',', strip_tags( $_POST['ppibfi_exclude'] ) ) ) );
 		sort($exclude_posts);
 		update_option( 'pibfi_no_show_button', $exclude_posts );
@@ -44,6 +46,7 @@ function pibfi_engine_configs() {
 	$xcp_cat = ( 'on' == get_option( 'ppibfi_pg_cat' ) ) ? 'checked' : '';
 	$xcp_opt_enable = ( 'on' == get_option( 'ppibfi_opt_enable' ) ) ? 'checked' : '';
 	$ppibfi_exclude = get_option( 'pibfi_no_show_button' );
+	$ppibfi_description = get_option( 'ppibfi_description' );
 ?>
 <script type="text/javascript">checked=false;
 function checkedAll () {var aa= document.getElementById('pinpages');checked = !checked;for (var i =0; i < aa.elements.length; i++) {aa.elements[i].checked = checked;}}</script>
@@ -85,6 +88,22 @@ function checkedAll () {var aa= document.getElementById('pinpages');checked = !c
 			<p>
 			<input type="checkbox" name="ppibfi_opt_enable" id="ppibfi_opt_enable" value="on" <?php echo $xcp_opt_enable?> />
 			<label for="ppibfi_opt_enable"><?=__( 'Enable opt-out', 'ppibfi_translate' ); ?> </label>
+			</p>
+		</fieldset>
+		
+		<fieldset>
+			<legend><?=__( 'Default description:','ppibfi_translate' ); ?> </legend>
+			<p><?=__( 'Select what will be sent as image description on pinned image', 'ppibfi_translate' ); ?> </p>
+			<p>
+			<select name="ppibfi_description" id="ppibfi_description">
+				<option value="post_title" <?php if ( 'post_title' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Post title','ppibfi_translate' ); ?></option>
+				<option value="post_title_link" <?php if ( 'post_title_link' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Post title | post link','ppibfi_translate' ); ?></option>
+				<option value="post_link" <?php if ( 'post_link' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Post link','ppibfi_translate' ); ?></option>
+				<option value="post_sitename" <?php if ( 'post_sitename' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Website name','ppibfi_translate' ); ?></option>
+				<option value="post_sitename_sitelink" <?php if ( 'post_sitename_sitelink' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Website name | website link','ppibfi_translate' ); ?></option>
+				<option value="post_sitename_title_link" <?php if ( 'post_sitename_title_link' == $ppibfi_description ) echo 'selected'; ?>><?=__( 'Website name | post name | post link','ppibfi_translate' ); ?></option>
+			</select>
+			
 			</p>
 		</fieldset>
 		<!-- Soon, I promise! -->

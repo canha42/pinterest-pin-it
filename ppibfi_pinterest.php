@@ -52,21 +52,50 @@ include( "ppibfi_meta.php" );  //Custom meta boxes for Posts and Pages
 function pibfi_engine( $content ) {
 	global $post;
 	$post_url = get_permalink(); //Get the post URL
-	$post_title = get_the_title( $post->ID ); //Get the post title
+	$ppibfi_description = get_option( 'ppibfi_description' );
+	switch ($ppibfi_description) {
+		case "post_title":
+		$description = get_the_title( $post->ID );
+		break;
+		
+		case "post_title_link":
+		$description = get_the_title( $post->ID ) ." | ". get_permalink();
+		break;
+		
+		case "post_link":
+		$description = get_permalink();
+		break;
+		
+		case "post_sitename":
+		$description = get_bloginfo('name');
+		break;
+		
+		case "post_sitename_sitelink":
+		$description = get_bloginfo('name') . " | " . get_bloginfo('url');
+		break;
+		
+		case "post_sitename_title_link":
+		$description = get_bloginfo('name') . " | " . get_the_title( $post->ID ) . " | " . get_bloginfo('url');
+		break;
+		
+		default:
+		$description = get_the_title( $post->ID );
+		break;
+	}
 	$pinterest_base_url = 'http://pinterest.com/pin/create/button/'; //Pinterests URL to create a Pin
 
 	$content = pibfi_engine_normalize_image_paths( $content );
 
 	// Show the pin only on images with the 'pinthis' class
 	if ( 'on' == get_option( 'ppibfi_img_pinthis' ) ) {
-		$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+		$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description );
 	} else {
 
 		// Show on index.php / home page:
 		if ( 'on' == get_option( 'ppibfi_pg_index' ) && is_home() ) {
 			$isOpted = get_post_meta( $post->ID, 'xcp_optin_post' );
 			if ( 'on' != $isOpted[0] ) {
-				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description );
 			}
 		}
 
@@ -74,7 +103,7 @@ function pibfi_engine( $content ) {
 		elseif ( 'on' == get_option( 'ppibfi_pg_single' ) && is_single() ) {
 			$isOpted = get_post_meta( $post->ID, 'xcp_optin_post' );
 			if ( 'on' != $isOpted[0] ) {
-				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description );
 			}
 		}
 
@@ -82,13 +111,13 @@ function pibfi_engine( $content ) {
 		elseif ( 'on' == get_option( 'ppibfi_pg_page' ) && is_page() ) {
 			$isOpted = get_post_meta( $post->ID, 'xcp_optin_post' );
 			if ( 'on' != $isOpted[0] ){
-				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+				$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description );
 			}
 		}
 
 		// Show on category.php / archive.php:
 		elseif ( 'on' == get_option( 'ppibfi_pg_cat' ) && is_category() || is_archive() || is_search() || is_author()) {
-			$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $post_title );
+			$content = pibfi_engine_add_pin( $content, $pinterest_base_url, $post_url, $description );
 		}
 	}
 	// Print out the content with the changes on images
@@ -428,6 +457,7 @@ function xc_pin_install() {
 	if( false === get_option( 'ppibfi_pg_single' ) ) update_option( 'ppibfi_pg_single', 'on' );
 	if( false === get_option( 'ppibfi_pg_page' ) ) update_option( 'ppibfi_pg_page', 'on' );
 	if( false === get_option( 'ppibfi_pg_cat' ) ) update_option( 'ppibfi_pg_cat', 'on' );
+	if( false === get_option( 'ppibfi_opt_enable' ) ) update_option( 'ppibfi_opt_enable', 'on' );
 	if( false === get_option( 'ppibfi_img_button' ) ) update_option( 'ppibfi_img_button', array( 'file' => XCPIN_PATH.'ppibfi_button.png', 'width' => 80, 'height' => 50 ) );
 	$dont_show_buttons_on = array( "wp-smiley", "nopin" ); //Default classes to *ignore* the button
 	if( false === get_option( 'pibfi_no_show_button' ) ) update_option( 'pibfi_no_show_button', $dont_show_buttons_on );
