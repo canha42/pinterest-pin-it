@@ -375,5 +375,5 @@ function pibfi_uninstall() {
 		delete_option( 'pibfi_no_show_button');
 }
 
-register_uninstall_hook( __FILE__, $callback );
+register_uninstall_hook( __FILE__, 'pibfi_uninstall' );
 ?>
